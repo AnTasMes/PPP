@@ -8924,11 +8924,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Programming\\C#\\LegoProdavnica\\src\\LegoProdavnica\\LegoProdavnica\\LegoProdavnica.csproj",
+      "projectUniqueName": "D:\\Programming\\C#\\LegoProdavnica\\src\\PPP\\LegoProdavnica\\LegoProdavnica.csproj",
       "projectName": "LegoProdavnica",
-      "projectPath": "D:\\Programming\\C#\\LegoProdavnica\\src\\LegoProdavnica\\LegoProdavnica\\LegoProdavnica.csproj",
+      "projectPath": "D:\\Programming\\C#\\LegoProdavnica\\src\\PPP\\LegoProdavnica\\LegoProdavnica.csproj",
       "packagesPath": "C:\\Users\\akita\\.nuget\\packages\\",
-      "outputPath": "D:\\Programming\\C#\\LegoProdavnica\\src\\LegoProdavnica\\LegoProdavnica\\obj\\",
+      "outputPath": "D:\\Programming\\C#\\LegoProdavnica\\src\\PPP\\LegoProdavnica\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\akita\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -15,28 +15,12 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\Programming\C#\LegoProdavnica\src\PPP\LegoProdavnica
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/Programming/C\#/LegoProdavnica/src/PPP/LegoProdavnica/Views/Admin/IndexAdmin.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXhBZG1pbi5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Programming/C\#/LegoProdavnica/src/PPP/LegoProdavnica/Views/Admin/ListEmployees.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTGlzdEVtcGxveWVlcy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Programming/C\#/LegoProdavnica/src/PPP/LegoProdavnica/Views/Admin/ListOrders.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTGlzdE9yZGVycy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/Programming/C\#/LegoProdavnica/src/PPP/LegoProdavnica/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Programming/C\#/LegoProdavnica/src/PPP/LegoProdavnica/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Programming/C\#/LegoProdavnica/src/PPP/LegoProdavnica/Views/Product/DetailedView.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxEZXRhaWxlZFZpZXcuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Programming/C\#/LegoProdavnica/src/PPP/LegoProdavnica/Views/Product/IndexProduct.cshtml]

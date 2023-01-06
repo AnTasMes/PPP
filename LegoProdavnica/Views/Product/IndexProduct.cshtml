@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LegoProdavnica.Models.Product>
+﻿@model IEnumerable<LegoProdavnica.Models.ProductModel>
 
 @{
     ViewData["Title"] = "IndexProduct";
@@ -85,6 +85,15 @@
         color: white;
     }
 
+    .close{
+        transition: all 0.2s;
+    }
+
+    .close:hover{
+        transition: all 0.3s;
+        transform: scale(1.9);
+    }
+
 </style>
 
 <div id="carouselExampleControls" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -126,7 +135,7 @@
 <br />
 <h3 class="display-5 mt-6">Recommended For You</h3>
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
+<div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
   <div class="col">
     <div class="card">
         <div class="card-image-holder">
@@ -134,11 +143,12 @@
             alt="Hollywood Sign on The Hill" />
         </div>
       <div class="card-body">
-        <h5 class="card-title"><a class="stretched-link prTitle" href="#proiz" style="position: relative;">Some proizvod</a></h5>
+          @*Modalni prozori moraju da se promene nekako da bude posebno za svaki proizvod, ali to cemo da vidimo kako jos*@
+        <h5 class="card-title"><a data-bs-toggle="modal" data-bs-target="#detailedProduct" class="stretched-link prTitle" style="position: relative;">Some proizvod</a></h5>
         <p class="card-text font-weight-bold">
           $220.00
         </p>
-        <a href="#addCard" class="btn btn-outline-primary cartBtn">ADD TO CART</a>
+        <a  class="btn btn-outline-primary cartBtn"><i class="bi-cart-fill me-1"> Add to cart</i></a>
       </div>
     </div>
   </div>
@@ -149,11 +159,11 @@
             alt="Palm Springs Road" />
         </div>
       <div class="card-body">
-        <h5 class="card-title"><a class="stretched-link prTitle" href="#proiz" style="position: relative;">Some proizvod</a></h5>
+        <h5 class="card-title"><a data-bs-toggle="modal" data-bs-target="#detailedProduct" class="stretched-link prTitle" style="position: relative;">Some proizvod</a></h5>
         <p class="card-text font-weight-bold">
           $220.00
         </p>
-        <a href="#addCard" class="btn btn-outline-primary cartBtn">ADD TO CART</a>
+        <a href="#addCard" class="btn btn-outline-primary cartBtn"><i class="bi-cart-fill me-1"> Add to cart</i></a>
       </div>
     </div>
   </div>
@@ -164,11 +174,11 @@
             alt="Los Angeles Skyscrapers" />
         </div>
       <div class="card-body">
-        <h5 class="card-title"><a class="stretched-link prTitle" href="#proiz" style="position: relative;">Some proizvod</a></h5>
+        <h5 class="card-title"><a data-bs-toggle="modal" data-bs-target="#detailedProduct" class="stretched-link prTitle" style="position: relative;">Some proizvod</a></h5>
         <p class="card-text font-weight-bold">
           $220.00
         </p>
-        <a href="#addCard" class="btn btn-outline-primary cartBtn">ADD TO CART</a>
+        <a href="#addCard" class="btn btn-outline-primary cartBtn"><i class="bi-cart-fill me-1"> Add to cart</i></a>
       </div>
     </div>
   </div>
@@ -179,15 +189,55 @@
             alt="Skyscrapers" />
         </div>
       <div class="card-body">
-        <h5 class="card-title"><a class="stretched-link prTitle" href="#proiz" style="position: relative;">Some proizvod</a></h5>
+        <h5 class="card-title"><a data-bs-toggle="modal" data-bs-target="#detailedProduct" class="stretched-link prTitle" style="position: relative;">Some proizvod</a></h5>
         <p class="card-text font-weight-bold">
           $220.00
         </p>
-        <a href="#addCard" class="btn btn-outline-primary cartBtn">ADD TO CART</a>
+        <a href="#addCard" class="btn btn-outline-primary cartBtn"><i class="bi-cart-fill me-1"> Add to cart</i></a>
       </div>
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="detailedProduct" role="dialog">
+    <div class="modal-dialog modal-xl">
+         <div class="modal-content">
+             <div class="modal-header d-flex justify-content-end">
+                 <button type="button" class="close bg-transparent border-0" data-bs-dismiss="modal" aria-label="Close"><span class="lead" aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="container px-4 px-lg-5 mb-4">
+                    <div class="row gx-4 gx-lg-5 align-items-center">
+                        <div class="col-md-6">
+                            <img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg", alt="..." />
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small mb-1">
+                                <h1 class="display-5 fw-bolder">Some product</h1>
+                            </div>
+                            <div class="fs-5 mb-5">
+                                <span class="text-decoration-line-through">$300.00</span>
+                                <span>$220.00</span>
+                            </div>
+                            <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing 
+                                elit. Praesentium at dolorem quidem modi. 
+                                Nam sequi consequatur obcaecati excepturi alias magni, accusamus 
+                                eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
+                   
+                            <div class="d-flex">
+                                <input class="form-control text-center me-3" type="number" value="1" style="max-width: 3rem;"/>
+                                <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                    <i class="bi-cart-fill me-1"> Add to cart</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 

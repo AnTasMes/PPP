@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LegoProdavnica.styles.css" asp-append-version="true" />
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css' rel='stylesheet' />
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -43,14 +44,26 @@
                          <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">O nama</a>
                         </li>
+                         <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="IndexAdmin">Admin dashboard</a>
+                        </li>
                     </ul>
+                    @* Ovu sekciju treba srediti u slucaju da je korisnik ulogovan ili nije*@
                     <ul class="navbar-nav float-end">
+                        @* Ako korisnik nije ulogovan*@
                         <li class="nav-item m-lg-1">
                             <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal" asp-area="" asp-controller="Home" asp-action="Index">Prijava</button>
                         </li>
                         <li class="nav-item nav-item m-lg-1">
                             <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#registerModal" asp-area="" asp-controller="Home" asp-action="Index">Registracija</button>
                         </li>
+
+                        @* Ako je korisnik ulogovan, prikazati cart*@
+                        <li class="nav-item m-lg-1">
+                            <button class="btn btn-outline-dark"><i class="bi-cart-fill"> Cart</i> <span class="badge bg-dark text-white rounded-pill">0</span></button>
+                        </li>
+
+                        @* Ja bih dodao user slider, sa strane da se otvara ili tako nesto, pa tu da stoji logout i sve promene na profilu, ali to je do Nine*@
                     </ul>
                 </div>
             </div>

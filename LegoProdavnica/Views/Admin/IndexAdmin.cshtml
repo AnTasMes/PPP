@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewData["Title"] = "IndexAdmin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .card{
+        transition: all 0.2s;
+    }
+    .card:hover{
+        transform: scale(1.01);
+        transition: all 0.2s;
+    }
+</style>
+
+<div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card h-100">
+                <div class="card-header text-center">
+                    <p class="display-6">Radnici</p>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Dodavanje i uklanjanje radnika</h5>
+                    <p class="card-text">Ovde se vrši pregled svih radnika i omogućava se kreiranje novih ili izmena trenutnih</p>     
+                </div>
+                <div class="card-footer bg-transparent">
+                        <a href="#" class="btn btn-outline-dark w-100">Pokreni</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card h-100">
+              <div class="card-header text-center">
+                    <p class="display-6">Narudžbine</p>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Upravljanje narudžbinama</h5>
+                    <p class="card-text">Ovde je moguće obustaviti ili promeniti narudžbine po zahtevu</p>
+                    
+                </div>
+                <div class="card-footer bg-transparent">
+                        <a href="#" class="btn btn-outline-dark w-100">Pokreni</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

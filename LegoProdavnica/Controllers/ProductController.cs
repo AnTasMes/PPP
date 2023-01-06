@@ -8,5 +8,10 @@ namespace LegoProdavnica.Controllers
         {
             return View();
         }
+
+        public IActionResult DetailedView()
+        {
+            return View();
+        }
     }
 }
