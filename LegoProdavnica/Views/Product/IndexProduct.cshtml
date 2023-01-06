@@ -12,6 +12,7 @@
         
     }
     .card-image-holder{
+        background-color: black;
         position: relative;
         overflow: hidden;
         z-index: 1;
@@ -21,6 +22,7 @@
 
     img {transition: .5s ease all; width: 100%; object-fit:cover;}
     .card:hover img {
+      opacity: 0.8;
       transform: scale(1.1);
     }
 
@@ -62,6 +64,8 @@
     .prTitle:hover,
     .prTitle:focus {
       background-size: 0 0.1em, 100% 0.1em;
+      color: black;
+      cursor: pointer
     }
 
     .carousel-item{
@@ -94,8 +98,36 @@
         transform: scale(1.9);
     }
 
-</style>
+    .btn-outline-warning:hover{
+        color:white;
+    }
 
+    .hover-underline-animation {
+      display: inline-block;
+      position: relative;
+      color: #73b6ff;
+    }
+
+    .hover-underline-animation::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      transform: scaleX(0);
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: #73b6ff;
+      transform-origin: bottom right;
+      transition: transform 0.25s ease-out;
+    }
+
+    .hover-underline-animation:hover::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+}
+
+</style>
 <div id="carouselExampleControls" class="carousel slide carousel-fade" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -144,7 +176,7 @@
         </div>
       <div class="card-body">
           @*Modalni prozori moraju da se promene nekako da bude posebno za svaki proizvod, ali to cemo da vidimo kako jos*@
-        <h5 class="card-title"><a data-bs-toggle="modal" data-bs-target="#detailedProduct" class="stretched-link prTitle" style="position: relative;">Some proizvod</a></h5>
+        <h5 class="card-title hover-underline-animation"><a data-bs-toggle="modal" data-bs-target="#detailedProduct" class="stretched-link prTitle " style="position: relative;">Some proizvod</a></h5>
         <p class="card-text font-weight-bold">
           $220.00
         </p>
@@ -159,7 +191,7 @@
             alt="Palm Springs Road" />
         </div>
       <div class="card-body">
-        <h5 class="card-title"><a data-bs-toggle="modal" data-bs-target="#detailedProduct" class="stretched-link prTitle" style="position: relative;">Some proizvod</a></h5>
+        <h5 class="card-title hover-underline-animation"><a data-bs-toggle="modal" data-bs-target="#detailedProduct" class="stretched-link prTitle" style="position: relative;">Some proizvod</a></h5>
         <p class="card-text font-weight-bold">
           $220.00
         </p>
@@ -174,7 +206,7 @@
             alt="Los Angeles Skyscrapers" />
         </div>
       <div class="card-body">
-        <h5 class="card-title"><a data-bs-toggle="modal" data-bs-target="#detailedProduct" class="stretched-link prTitle" style="position: relative;">Some proizvod</a></h5>
+        <h5 class="card-title hover-underline-animation"><a data-bs-toggle="modal" data-bs-target="#detailedProduct" class="stretched-link prTitle" style="position: relative;">Some proizvod</a></h5>
         <p class="card-text font-weight-bold">
           $220.00
         </p>
@@ -189,7 +221,7 @@
             alt="Skyscrapers" />
         </div>
       <div class="card-body">
-        <h5 class="card-title"><a data-bs-toggle="modal" data-bs-target="#detailedProduct" class="stretched-link prTitle" style="position: relative;">Some proizvod</a></h5>
+        <h5 class="card-title hover-underline-animation"><a data-bs-toggle="modal" data-bs-target="#detailedProduct" class="stretched-link prTitle" style="position: relative;">Some proizvod</a></h5>
         <p class="card-text font-weight-bold">
           $220.00
         </p>
@@ -224,11 +256,17 @@
                                 Nam sequi consequatur obcaecati excepturi alias magni, accusamus 
                                 eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
                    
-                            <div class="d-flex">
-                                <input class="form-control text-center me-3" type="number" value="1" style="max-width: 3rem;"/>
-                                <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                                    <i class="bi-cart-fill me-1"> Add to cart</i>
-                                </button>
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex p-2 mr-auto">
+                                    <input class="form-control text-center me-3" type="number" value="1" style="max-width: 3rem;"/>
+                                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                                        <i class="bi-cart-fill me-1"> Add to cart</i>
+                                    </button>
+                                
+                                </div>
+                                <div class="d-flex ml-10 mr-0 p-2">
+                                    <a class="btn btn-outline-warning" type="button" asp-controller="Product" asp-action="DetailedView"><i class="bi bi-star"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>

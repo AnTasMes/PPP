@@ -8,10 +8,23 @@
     .card{
         transition: all 0.2s;
     }
+
+    .card-header{
+        transition: all 0.3s;
+    }
+
+    .card:hover .card-header{
+        background-color: #1e2125;
+        color: white;
+        transition: all 0.4s;
+    }
+
     .card:hover{
         transform: scale(1.01);
         transition: all 0.2s;
     }
+
+
 </style>
 
 <div>
@@ -23,7 +36,7 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Dodavanje i uklanjanje radnika</h5>
-                    <p class="card-text">Ovde se vrši pregled svih radnika i omogućava se kreiranje novih ili izmena trenutnih</p>     
+                    <p class="card-text ">Ovde se vrši pregled svih radnika i omogućava se kreiranje novih ili izmena trenutnih</p>     
                 </div>
                 <div class="card-footer bg-transparent">
                         <a href="#" class="btn btn-outline-dark w-100">Pokreni</a>
