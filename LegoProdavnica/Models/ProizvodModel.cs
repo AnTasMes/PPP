@@ -1,6 +1,6 @@
 ﻿namespace LegoProdavnica.Models
 {
-    public class ProductModel
+    public class ProizvodModel
     {
         private string _id;
         private string _alternateId;
@@ -11,7 +11,7 @@
         private string _package;
         private bool _available;
 
-        public ProductModel(string alternateId, string title, string description, string age, string price, string package, bool available)
+        public ProizvodModel(string alternateId, string title, string description, string age, string price, string package, bool available)
         {
             _alternateId = alternateId;
             _title = title;

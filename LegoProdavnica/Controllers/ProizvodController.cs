@@ -2,7 +2,7 @@
 
 namespace LegoProdavnica.Controllers
 {
-    public class ProductController : Controller
+    public class ProizvodController : Controller
     {
         public IActionResult IndexProduct()
         {
