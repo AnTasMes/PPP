@@ -21,6 +21,8 @@ public partial class Proizvod
 
     public bool? NaStanju { get; set; }
 
+    public string? Slika { get; set; }
+
     public virtual ICollection<Narudzbina> Narudzbinas { get; } = new List<Narudzbina>();
 
     public virtual ICollection<RacunProizvod> RacunProizvods { get; } = new List<RacunProizvod>();

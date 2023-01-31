@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using LegoProdavnica.Models;
 
 namespace LegoProdavnica.Controllers
 {
-    public class UserController : Controller
+    public class ProfilController : Controller
     {
         // GET: UserController
         public ActionResult Index()
@@ -78,6 +79,16 @@ namespace LegoProdavnica.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpPost]
+        public ActionResult register(Profil model)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }
