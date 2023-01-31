@@ -36,12 +36,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Programming/CSharp/PPP/LegoProdavnica/Views/Product/DetailedView.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxEZXRhaWxlZFZpZXcuY3NodG1s
+[C:/Programming/CSharp/PPP/LegoProdavnica/Views/Proizvod/DetailedView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvaXp2b2RcRGV0YWlsZWRWaWV3LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Programming/CSharp/PPP/LegoProdavnica/Views/Product/IndexProduct.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHVjdFxJbmRleFByb2R1Y3QuY3NodG1s
+[C:/Programming/CSharp/PPP/LegoProdavnica/Views/Proizvod/IndexProduct.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvaXp2b2RcSW5kZXhQcm9kdWN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Programming/CSharp/PPP/LegoProdavnica/Views/Proizvod/ViewTest.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvaXp2b2RcVmlld1Rlc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Programming/CSharp/PPP/LegoProdavnica/Views/Shared/Error.cshtml]
