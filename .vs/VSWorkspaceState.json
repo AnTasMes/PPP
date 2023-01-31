@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\LegoProdavnica"
+    "\\LegoProdavnica",
+    "\\LegoProdavnica\\Controllers"
   ],
+  "SelectedNode": "\\LegoProdavnica\\Controllers\\EmployeeController.cs",
   "PreviewInSolutionExplorer": false
 }
