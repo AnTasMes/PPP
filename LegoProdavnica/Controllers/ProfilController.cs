@@ -6,6 +6,19 @@ namespace LegoProdavnica.Controllers
 {
     public class ProfilController : Controller
     {
+
+        private LegoProdavnicaContext _context = new LegoProdavnicaContext(); 
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
         // GET: UserController
         public ActionResult Index()
         {
@@ -82,11 +95,50 @@ namespace LegoProdavnica.Controllers
         }
 
         [HttpPost]
-        public ActionResult register(Profil model)
+        public ActionResult Register(Profil model, string confirm)
         {
+            System.Diagnostics.Debug.WriteLine(model.KorisnickoIme + " | Password:  " + model.Sifra + " | Confirmed: " + confirm);
+            if(confirm != model.Sifra)
+            {
+                return View();
+            }
+
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index");
+                try
+                {
+                    System.Diagnostics.Debug.WriteLine("UlogaID: "+_context.Ulogas.First(u => u.Tip.Equals("Korisnik")).UlogaId);
+
+                    model.UlogaId = _context.Ulogas.First(u => u.Tip.Equals("Korisnik")).UlogaId;
+                    _context.Profils.Add(model);
+                    _context.SaveChanges();
+                    return RedirectToAction("Index");
+
+                }catch(Exception ex)
+                {
+                    return View();
+                }
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(Profil model)
+        {
+            System.Diagnostics.Debug.WriteLine(model.KorisnickoIme + " | Password:  " + model.Sifra);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    if(_context.Profils.Any(p=> p.KorisnickoIme.Equals(model.KorisnickoIme) && p.Sifra.Equals(p.Sifra)))
+                    {
+                        System.Diagnostics.Debug.WriteLine("Logged in");
+                        return RedirectToAction("Index");
+                    }
+                }catch(Exception ex)
+                {
+                    return View();
+                }
             }
             return View();
         }

@@ -1,0 +1,57 @@
+﻿@model LegoProdavnica.Models.Profil
+
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="card">
+      <div class="card-header d-flex justify-content-center bg-grey">
+            <h1 class="display-4" id="exampleModalLabel">Registracija</h1>
+        </div>
+        <div class="card-body">
+          @using (Html.BeginForm("Register", "Profil", FormMethod.Post)){
+              <div class="form-row d-flex">
+                <div class="form-group col-md-6">
+                  <label for="rgIme">Ime</label>
+                  @Html.TextBoxFor(p => p.Ime, new {@class="form-control"})
+                  @*<input type="text" class="form-control" id="rgIme" placeholder="Marko">*@
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="rgPrezime">Prezime</label>
+                  @Html.TextBoxFor(p => p.Prezime, new {@class="form-control"})
+
+                  @*<input type="text" class="form-control" id="rgPrezime" placeholder="Markovic">*@
+                </div>
+              </div>
+               <div class="form-group">
+                  <label class="col-sm col-form-label" for="rgEmail">Email:</label>
+                  @Html.TextBoxFor(p => p.Email, new {@class="form-control"})
+
+                  @*<input type="text" name="rgEmail" class="form-control" placeholder="example@example.com" />*@
+              </div> 
+              <div class="form-group">
+                  <label class="col-sm col-form-label" for="rgUsername">Username:</label>
+                  @Html.TextBoxFor(p => p.KorisnickoIme, new {@class="form-control"})
+
+                  @*<input type="text" name="rgUsername" class="form-control" placeholder="Unesite korisničko ime" />*@
+              </div>         
+              <div class="form-group">
+                  <label class="col-sm-2 col-form-label" for="oPwd">Password:</label>
+                  @Html.PasswordFor(p => p.Sifra, new {@class="form-control", @id="oPwd"})
+                  
+                  @*<input type="password" name="rgPassword" class="form-control" placeholder="Unesite korisničku šifru" />*@
+              </div>
+              <div class="form-group">
+                  <label class="col-sm-2 col-form-label" for="confirm">Confirm Password:</label>
+                  <input type="password" name="confirm" id="confirm" class="form-control" placeholder="Ponovite sifru" />
+              </div>
+              <div class="mt-5 modal-footer d-flex justify-content-center">
+                <button type="submit" class="w-100 btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>Kreirajte profil</button>
+              </div>
+          }
+          </div>
+        </div>
+</div>
+

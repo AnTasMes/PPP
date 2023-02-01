@@ -1,6 +1,4 @@
-﻿@model LegoProdavnica.Models.Profil
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -42,7 +40,7 @@
                             <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Početna</a>
                         </li>
                          <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Proizvod" asp-action="IndexProduct">Proizvodi</a>
+                            <a class="nav-link" asp-area="" asp-controller="Proizvod" asp-action="GetAllProducts">Proizvodi</a>
                         </li>
                          <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">O nama</a>
@@ -57,10 +55,10 @@
                     <ul class="navbar-nav float-end">
                         @* Ako korisnik nije ulogovan*@
                         <li class="nav-item m-lg-1">
-                            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal" asp-area="" asp-controller="Home" asp-action="Index">Prijava</button>
+                            <a class="btn btn-outline-primary" asp-area="" asp-controller="Profil" asp-action="Login">Prijava</a>
                         </li>
                         <li class="nav-item nav-item m-lg-1">
-                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#registerModal" asp-area="" asp-controller="Home" asp-action="Index">Registracija</button>
+                            <a class="btn btn-success" asp-area="" asp-controller="Profil" asp-action="Register">Registracija</a>
                         </li>
 
                         @* Ako je korisnik ulogovan, prikazati cart*@
@@ -113,83 +111,10 @@
   </section>
   <!-- Section: Social media -->
   
-<div class="modal fade" id="loginModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header d-flex justify-content-center">
-            <h1 class="display-4" id="exampleModalLabel">Prijavljivanje</h1>
-        </div>
-        <div class="modal-body">
-          <form>
-              <div class="form-group">
-                  <label class="col-sm col-form-label" for="lgnUname">Username:</label>
-                  <input type="text" name="lgnUname" class="form-control" placeholder="Unesite korisničko ime" />
-              </div>
-              <div class="form-group">
-                  <label class="col-sm-2 col-form-label" for="lgnPwd">Password:</label>
-                  <input type="password" name="lgnPwd" class="form-control" placeholder="Unesite korisničku šifru" />
-              </div>
-              <div class="mt-1 form-group d-flex">
-                  <label class="col-sm-2 col-form-label"><input type="checkbox" name="lgnRememberMe" class="form-check-input" id="exampleCheck1" value="">
-                  Zapamti profil</label>
-              </div>
-              <div class="modal-footer d-flex justify-content-center">
-                <button type="submit" class="w-100 btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>Prijavite se</button>
-              </div>
-          </form>
-        </div>
-    </div>
-  </div>
-</div>
 
 
-<div class="modal fade" id="registerModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header d-flex justify-content-center bg-grey">
-            <h1 class="display-4" id="exampleModalLabel">Registracija</h1>
-        </div>
-        <div class="modal-body">
-          @using (Html.BeginForm("register", "Profil", FormMethod.Post)){
-              <div class="form-row d-flex">
-                <div class="form-group col-md-6">
-                  <label for="rgIme">Ime</label>
-                  @Html.TextBoxFor(p => p.Ime, new {@class="form-control"})
-                  @*<input type="text" class="form-control" id="rgIme" placeholder="Marko">*@
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="rgPrezime">Prezime</label>
-                  @Html.TextBoxFor(p => p.Prezime, new {@class="form-control"})
 
-                  @*<input type="text" class="form-control" id="rgPrezime" placeholder="Markovic">*@
-                </div>
-              </div>
-               <div class="form-group">
-                  <label class="col-sm col-form-label" for="rgEmail">Email:</label>
-                  @Html.TextBoxFor(p => p.Email, new {@class="form-control"})
 
-                  @*<input type="text" name="rgEmail" class="form-control" placeholder="example@example.com" />*@
-              </div> 
-              <div class="form-group">
-                  <label class="col-sm col-form-label" for="rgUsername">Username:</label>
-                  @Html.TextBoxFor(p => p.KorisnickoIme, new {@class="form-control"})
-
-                  @*<input type="text" name="rgUsername" class="form-control" placeholder="Unesite korisničko ime" />*@
-              </div>         
-              <div class="form-group">
-                  <label class="col-sm-2 col-form-label" for="rgPassword">Password:</label>
-                  @Html.PasswordFor(p => p.KorisnickoIme, new {@class="form-control"})
-                  
-                  @*<input type="password" name="rgPassword" class="form-control" placeholder="Unesite korisničku šifru" />*@
-              </div>
-              <div class="mt-5 modal-footer d-flex justify-content-center">
-                <button type="submit" class="w-100 btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>Kreirajte profil</button>
-              </div>
-          }
-          </div>
-    </div>
-  </div>
-</div>
 
 
   <!-- Section: Links  -->
