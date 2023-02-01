@@ -4,6 +4,7 @@
     ViewData["Title"] = "IndexProduct";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <style>
     .card{
         position: relative;
@@ -135,9 +136,92 @@
         color: white;
     }
     
-    
-
 </style>
+
+<script>
+    function updateShoppingCart() {
+        var itemsStorage2 = localStorage.getItem('items');
+        var itemsJson2 = {}
+
+        if (itemsStorage2) {
+            itemsJson2 = JSON.parse(itemsStorage2)
+        }
+
+        var list = document.getElementById('cartDisplayList')
+
+        var child = list.lastElementChild; 
+        while (child) {
+            list.removeChild(child);
+            child = list.lastElementChild;
+        }
+
+        var index = 0
+
+        for (var item in itemsJson2) {
+            let current = itemsJson2[item]
+            let div = document.createElement("div")
+       
+            let a = `<div class="container px-4 px-lg-5 mb-4">
+                            <div class="row gx-4 gx-lg-5 align-items-center">
+                                <div class="col-md-6">
+                                    <img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg", alt="..." />
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small mb-1">
+                                        <h1 class="fw-bolder">${current.naziv}</h1>
+                                    </div>
+                                    <div class="fs-5 mb-5">
+                                        <span>Cena: ${current.cena} RSD</span> <br />
+                                        <span>Godina: ${current.godine} god.</span> <br />
+                                        <span>Pakovanje: ${current.pakovanje}</span> <br />
+                                        <span>Tip: ${current.tip}</span> <br />
+                                        <span>Kolicina: ${current.count}</span> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />`
+
+            div.innerHTML = a
+            list.appendChild(div)
+            index++
+        }
+    }
+
+    function addToShoppingCart(id, naziv, godine, pakovanje, tip, cena) {
+        var itemsStorage = localStorage.getItem('items');
+        var itemsJson = {}
+
+        if (itemsStorage) {
+            itemsJson = JSON.parse(itemsStorage)
+        }
+
+        var name = 'proizvod' + id
+
+        if (!isNaN(itemsJson[name])) {
+            itemsJson[name] = {}
+            itemsJson[name].count = 0
+        }
+
+        itemsJson[name].count++
+        itemsJson[name].id = id
+        itemsJson[name].naziv = naziv
+        itemsJson[name].godine = godine
+        itemsJson[name].pakovanje = pakovanje
+        itemsJson[name].tip = tip
+        itemsJson[name].cena = cena
+        console.log(itemsJson[name].count)
+        localStorage.setItem('items', JSON.stringify(itemsJson))
+
+        document.getElementById('shoppingCarCount').textContent = Object.keys(itemsJson).length
+        updateShoppingCart()
+    }
+
+    window.onload = function() {
+      updateShoppingCart();
+    };
+</script>
+
     <div id="carouselExampleControls" class="carousel slide carousel-fade crsl" data-bs-ride="carousel">
         <div class="carousel-inner">
         <div class="carousel-item active">
@@ -201,6 +285,9 @@
     <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
         @foreach (var item in Model)
         {
+
+        string fName = "detailedProduct" + item.ProizvodId;
+        
            
         <div class="col">
         <div class="card">
@@ -209,53 +296,46 @@
             </div>
           <div class="card-body">
               @*Modalni prozori moraju da se promene nekako da bude posebno za svaki proizvod, ali to cemo da vidimo kako jos*@
-            <h5 class="card-title hover-underline-animation"><a data-bs-toggle="modal" data-bs-target="#detailedProduct" class="stretched-link prTitle " style="position: relative;">@item.Naziv</a></h5>
+            <h5 class="card-title hover-underline-animation"><a data-bs-toggle="modal" data-bs-target="#@fName" class="stretched-link prTitle " style="position: relative;">@item.Naziv</a></h5>
             <p class="card-text font-weight-bold">
               @item.Cena RSD
             </p>
-            <a  class="btn btn-outline-primary cartBtn"><i class="bi-cart-fill me-1"> Add to cart</i></a>
+                <a  class="btn btn-outline-primary cartBtn" onclick="addToShoppingCart(@item.ProizvodId, '@item.Naziv', @item.Godine, '@item.Pakovanje', '@item.Tip', '@item.Cena')"><i class="bi-cart-fill me-1"> Add to cart</i></a>
           </div>
         </div>
       </div>
-        }
-    </div>
-</div>
 
-<div class="modal fade" id="detailedProduct" role="dialog">
-    <div class="modal-dialog modal-xl">
-         <div class="modal-content">
-             <div class="modal-header d-flex justify-content-end">
-                 <button type="button" class="close bg-transparent border-0" data-bs-dismiss="modal" aria-label="Close"><span class="lead" aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-body">
-                <div class="container px-4 px-lg-5 mb-4">
-                    <div class="row gx-4 gx-lg-5 align-items-center">
-                        <div class="col-md-6">
-                            <img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg", alt="..." />
-                        </div>
-                        <div class="col-md-6">
-                            <div class="small mb-1">
-                                <h1 class="display-5 fw-bolder">Some product</h1>
+        <div class="modal fade" id="@fName" role="dialog">
+        <div class="modal-dialog modal-xl">
+             <div class="modal-content">
+                 <div class="modal-header d-flex justify-content-end">
+                     <button type="button" class="close bg-transparent border-0" data-bs-dismiss="modal" aria-label="Close"><span class="lead" aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container px-4 px-lg-5 mb-4">
+                        <div class="row gx-4 gx-lg-5 align-items-center">
+                            <div class="col-md-6">
+                                <img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg", alt="..." />
                             </div>
-                            <div class="fs-5 mb-5">
-                                <span class="text-decoration-line-through">$300.00</span>
-                                <span>$220.00</span>
-                            </div>
-                            <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing 
-                                elit. Praesentium at dolorem quidem modi. 
-                                Nam sequi consequatur obcaecati excepturi alias magni, accusamus 
-                                eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
-                   
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex p-2 mr-auto">
-                                    <input class="form-control text-center me-3" type="number" value="1" style="max-width: 3rem;"/>
-                                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                                        <i class="bi-cart-fill me-1"> Add to cart</i>
-                                    </button>
-                                
+                            <div class="col-md-6">
+                                <div class="small mb-1">
+                                    <h1 class="display-5 fw-bolder">@item.Naziv</h1>
                                 </div>
-                                <div class="d-flex ml-10 mr-0 p-2">
-                                    <a class="btn btn-outline-warning" type="button" asp-controller="Product" asp-action="DetailedView"><i class="bi bi-star"></i></a>
+                                <div class="fs-5 mb-5">
+                                    <span>@item.Cena RSD</span>
+                                </div>
+
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex p-2 mr-auto">
+                                        <input class="form-control text-center me-3" type="number" value="1" style="max-width: 3rem;"/>
+                                            <button class="btn btn-outline-dark flex-shrink-0" type="button" onclick="addToShoppingCart(@item.ProizvodId)">
+                                            <i class="bi-cart-fill me-1"> Add to cart</i>
+                                        </button>
+
+                                    </div>
+                                    <div class="d-flex ml-10 mr-0 p-2">
+                                        <a class="btn btn-outline-warning" type="button" asp-controller="Product" asp-action="DetailedView"><i class="bi bi-star"></i></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -264,8 +344,9 @@
             </div>
         </div>
     </div>
+        }
+    </div>
 </div>
-
 
 
 

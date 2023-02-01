@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace LegoProdavnica.Models;
 
-namespace LegoProdavnica.Models;
-
-public partial class Uloga
-{
+public partial class Uloga {
     public int UlogaId { get; set; }
 
     public string? Opis { get; set; }
