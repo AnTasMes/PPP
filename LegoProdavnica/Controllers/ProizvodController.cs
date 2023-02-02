@@ -1,6 +1,5 @@
 ﻿using LegoProdavnica.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace LegoProdavnica.Controllers
 {

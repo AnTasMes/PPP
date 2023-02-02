@@ -1,6 +1,10 @@
-﻿namespace LegoProdavnica.Models;
+﻿using System;
+using System.Collections.Generic;
 
-public partial class Racun {
+namespace LegoProdavnica.Models;
+
+public partial class Racun
+{
     public int RacunId { get; set; }
 
     public string? AlternateId { get; set; }

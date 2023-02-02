@@ -1,6 +1,10 @@
-﻿namespace LegoProdavnica.Models;
+﻿using System;
+using System.Collections.Generic;
 
-public partial class Narudzbina {
+namespace LegoProdavnica.Models;
+
+public partial class Narudzbina
+{
     public int NarudzbinaId { get; set; }
 
     public DateTime? DatumKreacije { get; set; }
