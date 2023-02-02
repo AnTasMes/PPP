@@ -29,7 +29,17 @@ namespace LegoProdavnica.Controllers
             return View(_context.Proizvods.ToList());
         }
 
-        [HttpPost]
+		public IActionResult NarudzbineVIew() {
+			return View(_context.Narudzbinas.ToList());
+		}
+
+        public IActionResult DeleteNarudzbina(int id) {
+            _context.Narudzbinas.Remove(_context.Narudzbinas.FirstOrDefault(n => n.NarudzbinaId == id));
+            _context.SaveChanges();
+            return View();  
+        }
+
+		[HttpPost]
         public IActionResult Filter(string order, string name)
         {
             System.Diagnostics.Debug.WriteLine("Order: " + order + " | Name: "+ name);
