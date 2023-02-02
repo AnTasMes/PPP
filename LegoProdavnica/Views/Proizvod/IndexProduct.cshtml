@@ -199,7 +199,7 @@
 
         var name = 'proizvod' + id
 
-        if (!isNaN(itemsJson[name])) {
+        if (itemsJson[name] == undefined) {
             itemsJson[name] = {}
             itemsJson[name].count = 0
         }
