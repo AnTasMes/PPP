@@ -15,6 +15,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\Programming\C#\LegoProdavnica\src\PPP\LegoProdavnica
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/Programming/C\#/LegoProdavnica/src/PPP/LegoProdavnica/Views/Admin/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Programming/C\#/LegoProdavnica/src/PPP/LegoProdavnica/Views/Admin/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Programming/C\#/LegoProdavnica/src/PPP/LegoProdavnica/Views/Admin/IndexAdmin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXhBZG1pbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
