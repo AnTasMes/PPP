@@ -25,6 +25,7 @@
       }
     </style>
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -63,7 +64,7 @@
 
                         @* Ako je korisnik ulogovan, prikazati cart*@
                         <li class="nav-item m-lg-1">
-                            <button class="btn btn-outline-dark"><i class="bi-cart-fill" data-bs-toggle="modal" data-bs-target="#cartDisplay"> Cart</i> <span class="badge bg-dark text-white rounded-pill" id="shoppingCarCount">0</span></button>
+                            <button class="btn btn-outline-dark" onclick="updateShoppingCart()" ><i class="bi-cart-fill" data-bs-toggle="modal" data-bs-target="#cartDisplay"> Cart</i> <span class="badge bg-dark text-white rounded-pill" id="shoppingCarCount">0</span></button>
                         </li>
 
                         @* Ja bih dodao user slider, sa strane da se otvara ili tako nesto, pa tu da stoji logout i sve promene na profilu, ali to je do Nine*@
@@ -110,56 +111,7 @@
     <!-- Right -->
   </section>
   <!-- Section: Social media -->
-  
-
-
-@*<div class="modal fade" id="registerModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header d-flex justify-content-center bg-grey">
-            <h1 class="display-4" id="exampleModalLabel">Registracija</h1>
-        </div>
-        <div class="modal-body">
-          @using (Html.BeginForm("register", "Profil", FormMethod.Post)){
-              <div class="form-row d-flex">
-                <div class="form-group col-md-6">
-                  <label for="rgIme">Ime</label>
-                  @Html.TextBoxFor(p => p.Ime, new {@class="form-control"})
-                  @*<input type="text" class="form-control" id="rgIme" placeholder="Marko">
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="rgPrezime">Prezime</label>
-                  @Html.TextBoxFor(p => p.Prezime, new {@class="form-control"})
-
-                  @*<input type="text" class="form-control" id="rgPrezime" placeholder="Markovic">
-                </div>
-              </div>
-               <div class="form-group">
-                  <label class="col-sm col-form-label" for="rgEmail">Email:</label>
-                  @Html.TextBoxFor(p => p.Email, new {@class="form-control"})
-
-                  @*<input type="text" name="rgEmail" class="form-control" placeholder="example@example.com" />
-              </div> 
-              <div class="form-group">
-                  <label class="col-sm col-form-label" for="rgUsername">Username:</label>
-                  @Html.TextBoxFor(p => p.KorisnickoIme, new {@class="form-control"})
-
-                  @*<input type="text" name="rgUsername" class="form-control" placeholder="Unesite korisničko ime" />
-              </div>         
-              <div class="form-group">
-                  <label class="col-sm-2 col-form-label" for="rgPassword">Password:</label>
-                  @Html.PasswordFor(p => p.KorisnickoIme, new {@class="form-control"})
-                  
-                  @*<input type="password" name="rgPassword" class="form-control" placeholder="Unesite korisničku šifru" />
-              </div>
-              <div class="mt-5 modal-footer d-flex justify-content-center">
-                <button type="submit" class="w-100 btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span>Kreirajte profil</button>
-              </div>
-          }
-          </div>
-    </div>
-  </div>
-</div>*@
+ 
 
     <div class="modal fade" id="cartDisplay" role="dialog">
         <div class="modal-dialog modal-xl">
@@ -173,6 +125,7 @@
                 <div class="modal-body" id="cartDisplayList">
 
                 </div>
+                <button type="button" class="btn btn-outline-primary cartBtn" onclick="location.href='@Url.Action("buyCart", "Proizvod")'" >Kupi</button>
             </div>
         </div>
     </div>
