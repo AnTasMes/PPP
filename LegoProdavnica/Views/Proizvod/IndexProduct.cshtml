@@ -271,7 +271,7 @@
 							@item.Cena RSD
 				</p>
 
-				<button type="button" class="btn btn-outline-primary cartBtn" onclick="location.href='@Url.Action("addToCart", "Proizvod", @item)'" >Kupi</button>
+				<button type="button" class="btn btn-outline-primary cartBtn" onclick="location.href='@Url.Action("addToCart", "Proizvod", @item)'" >Dodaj u korpu</button>
 			  </div>
 			</div>
 		  </div>
@@ -279,18 +279,22 @@
 			<div class="modal fade" id="@fName" role="dialog">
 			<div class="modal-dialog modal-xl">
 				 <div class="modal-content">
-					 <div class="modal-header d-flex justify-content-end">
-						 <button type="button" class="close bg-transparent border-0" data-bs-dismiss="modal" aria-label="Close"><span class="lead" aria-hidden="true">&times;</span></button>
+					 <div class="modal-header d-flex">
+						<h2>Proizvod</h2>
+						<div class="justify-content-end">
+							<button type="button" class="close bg-transparent border-0" data-bs-dismiss="modal" aria-label="Close"><span class="lead" aria-hidden="true">&times;</span></button>
+						</div>
 					</div>
 					<div class="modal-body">
 						<div class="container px-4 px-lg-5 mb-4">
 							<div class="row gx-4 gx-lg-5 align-items-center">
 								<div class="col-md-6">
-									<img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg", alt="..." />
+									<img class="card-img-top mb-5 mb-md-0" src="@item.Slika", alt="..." />
 								</div>
 								<div class="col-md-6">
 									<div class="small mb-1">
 										<h1 class="display-5 fw-bolder">@item.Naziv</h1>
+										<h4 class="fw-bolder">@item.Cena RSD</h4>
 									</div>
 									<div class="d-flex ml-10 mr-0 p-2">
 										<div class="p-2">
@@ -303,7 +307,7 @@
 											<button type="button" class="btn btn-outline-primary cartBtn" onclick="location.href='@Url.Action("addToCart", "Proizvod", @item)'" >Naruci</button>
 										</div>
 										<div class="p-2">
-											<a class="btn btn-outline-warning" type="button" asp-controller="Proizvod" asp-action="DetailedView"><i class="bi bi-star"></i></a>
+											<button type="button" class="btn btn-outline-primary cartBtn" onclick="location.href='@Url.Action("DetailedView", "Proizvod", @item)'" >Detaljno</button>
 										</div>
 									</div>
 								</div>
