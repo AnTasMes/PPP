@@ -30,6 +30,35 @@ namespace LegoProdavnica.Controllers {
             return View();
         }
 
+        public ActionResult Edit(int id) {
+            System.Diagnostics.Debug.WriteLine(id);
+            return View(_context.Profils.FirstOrDefault(n => n.ProfilId == id));
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Profil p) {
+            if (p == null) {
+                return View();
+            } else {
+                if (ModelState.IsValid) {
+
+                    if (_context.Profils.FirstOrDefault(n => n.KorisnickoIme == p.KorisnickoIme) != null) {
+                        TempData["msg"] = "<script>alert('Korisnicko ime vec postoji');</script>";
+                        return View();
+                    }
+
+                    try {
+                        _context.Profils.Update(p);
+                        _context.SaveChanges();
+                    }catch(Exception ex) {
+                        System.Diagnostics.Debug.WriteLine(ex.Message);
+                    }
+                }
+
+                return View("Index");
+            }
+        }
+
         // POST: UserController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -41,21 +70,8 @@ namespace LegoProdavnica.Controllers {
             }
         }
 
-        // GET: UserController/Edit/5
-        public ActionResult Edit(int id) {
-            return View();
-        }
 
-        // POST: UserController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection) {
-            try {
-                return RedirectToAction(nameof(Index));
-            } catch {
-                return View();
-            }
-        }
+
 
         // GET: UserController/Delete/5
         public ActionResult Delete(int id) {
@@ -107,7 +123,9 @@ namespace LegoProdavnica.Controllers {
 
                         model.Uloga = _context.Ulogas.FirstOrDefault(u => u.UlogaId == model.UlogaId);
 
-						string serialized = JsonConvert.SerializeObject(model);
+                        Profil korisnik = _context.Profils.FirstOrDefault(p => p.KorisnickoIme == model.KorisnickoIme);
+
+						string serialized = JsonConvert.SerializeObject(korisnik);
 						Response.Cookies.Append("token", serialized, opt);
 
 						System.Diagnostics.Debug.WriteLine("Logged in");
@@ -118,6 +136,12 @@ namespace LegoProdavnica.Controllers {
                 }
             }
             return View();
+        }
+
+        public ActionResult Logout() {
+            Response.Cookies.Delete("items");
+            Response.Cookies.Delete("token");
+            return RedirectToAction("Index");
         }
     }
 }

@@ -229,5 +229,62 @@ namespace LegoProdavnica.Controllers
 
             return View("IndexProduct", _context.Proizvods.ToList<Proizvod>());
         }
+
+        public IActionResult oceni(int user, int item, int ocena) {
+            Recenzija rec = new Recenzija();
+            rec.Ocena = ocena;
+            rec.ProizvodId = item;
+            rec.DatumKreacija = DateTime.Now;
+            rec.KorisnikId = user;
+            rec.Korisnik = _context.Profils.FirstOrDefault(k => k.ProfilId == user);
+
+            try {
+                _context.Recenzijas.Add(rec);
+                _context.SaveChanges();
+            }catch(Exception ex) {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+
+            return RedirectToAction("DetailedView", _context.Proizvods.FirstOrDefault(p => p.ProizvodId == item));
+        }
+
+        public IActionResult naruci(string adresa, int user, int item) {
+            Narudzbina n = new Narudzbina();
+            n.Adresa = adresa;
+            n.KorisnikId = user;
+            n.Korisnik = _context.Profils.FirstOrDefault(k => k.ProfilId == user);
+            n.ProizvodId = item;
+            n.DatumKreacije = DateTime.Now;
+            n.DatumDostave = DateTime.Now.AddDays(5);
+
+            System.Diagnostics.Debug.WriteLine(n.Adresa + " " + n.KorisnikId + " " + n.KorisnikId + " " + n.ProizvodId);
+
+            try {
+                _context.Narudzbinas.Add(n);
+                _context.SaveChanges();
+            }catch(Exception ex) {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+
+            return View("IndexProduct", _context.Proizvods.ToList<Proizvod>());
+        }
+
+        public IActionResult rezervisi(DateTime datum, int user, int item) {
+            Rezervacija r = new Rezervacija();
+            r.DatumKreacije = DateTime.Now;
+            r.DatumDostave = datum;
+            r.KorisnikId = user;
+            r.Korisnik = _context.Profils.FirstOrDefault(k => k.ProfilId == user);
+            r.ProizvodId = item;
+
+            try {
+                _context.Rezervacijas.Add(r);
+                _context.SaveChanges();
+            }catch(Exception ex) {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
+            }
+
+            return View("IndexProduct", _context.Proizvods.ToList<Proizvod>());
+        }
     }
 }

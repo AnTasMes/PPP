@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Newtonsoft.Json;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -58,19 +59,37 @@
                     @* Ovu sekciju treba srediti u slucaju da je korisnik ulogovan ili nije*@
                     <ul class="navbar-nav float-end">
                         @* Ako korisnik nije ulogovan*@
-                        <li class="nav-item m-lg-1">
-                            <a class="btn btn-outline-primary" asp-area="" asp-controller="Profil" asp-action="Login">Prijava</a>
-                        </li>
-                        <li class="nav-item nav-item m-lg-1">
-                            <a class="btn btn-success" asp-area="" asp-controller="Profil" asp-action="Register">Registracija</a>
-                        </li>
 
-                        @* Ako je korisnik ulogovan, prikazati cart*@
-                        <li class="nav-item m-lg-1">
-                            <button class="btn btn-outline-dark" onclick="updateShoppingCart()" ><i class="bi-cart-fill" data-bs-toggle="modal" data-bs-target="#cartDisplay"> Cart</i> <span class="badge bg-dark text-white rounded-pill" id="shoppingCarCount">0</span></button>
-                        </li>
+                        @{
+                            string userString = "";
+                            bool result = Context.Request.Cookies.TryGetValue("token", out userString);
+                            Profil user = new Profil();
+                            user.UlogaId = -1;
 
-                        @* Ja bih dodao user slider, sa strane da se otvara ili tako nesto, pa tu da stoji logout i sve promene na profilu, ali to je do Nine*@
+                            if (result) {
+                                user = JsonConvert.DeserializeObject<Profil>(userString);
+                            }
+                        }
+
+                        @if (user.UlogaId == -1) {
+                            <li class="nav-item m-lg-1">
+                                <a class="btn btn-outline-primary" asp-area="" asp-controller="Profil" asp-action="Login">Prijava</a>
+                            </li>
+                            <li class="nav-item nav-item m-lg-1">
+                                <a class="btn btn-success" asp-area="" asp-controller="Profil" asp-action="Register">Registracija</a>
+                            </li>
+                        } else {
+                            <li class="nav-item nav-item m-lg-1">
+                                <a class="btn btn-success" asp-area="" asp-controller="Profil" asp-action="Edit" asp-route-id="@user.ProfilId">Izmeni profil</a>
+                            </li>
+                            <li class="nav-item nav-item m-lg-1">
+                                <a class="btn btn-success" asp-area="" asp-controller="Profil" asp-action="Logout">Odjava</a>
+                            </li>
+                            <li class="nav-item m-lg-1">
+                                <button class="btn btn-outline-dark" onclick="updateShoppingCart()" ><i class="bi-cart-fill" data-bs-toggle="modal" data-bs-target="#cartDisplay"> Cart</i> <span class="badge bg-dark text-white rounded-pill" id="shoppingCarCount">0</span></button>
+                            </li>
+                        }
+
                     </ul>
                 </div>
             </div>
@@ -128,7 +147,12 @@
                 <div class="modal-body" id="cartDisplayList">
 
                 </div>
-                <button type="button" class="btn btn-outline-primary cartBtn" onclick="location.href='@Url.Action("buyCart", "Proizvod")'" >Kupi</button>
+                <div class="p-2 d-flex justify-content-center">
+                    <h3>  Ukupna cena: <span id="ukupnaCenaTekst">0</span> RSD</h3>
+                </div>
+                <div class="p-2 d-flex justify-content-center">
+                    <button type="button" class="btn btn-outline-primary btn-lg btn-block" onclick="location.href='@Url.Action("buyCart", "Proizvod")'" >Kupi</button>
+                </div>
             </div>
         </div>
     </div>
@@ -152,3 +176,63 @@
 </html>
 
 
+      <script>
+    function getCookie(name) {
+        const cookie = decodeURIComponent(document.cookie)
+        const value = `; ${cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    function updateShopingCartCount() {
+        var itemsCookie = getCookie('items')
+        var items = JSON.parse(itemsCookie)
+        document.getElementById('shoppingCarCount').textContent = items.length
+    }
+
+    function updateShoppingCart() {
+        var itemsCookie = getCookie('items')
+        var items = JSON.parse(itemsCookie)
+
+        updateShopingCartCount()
+
+        var list = document.getElementById('cartDisplayList')
+        list.innerHTML = ""
+        var total = 0
+
+        console.log(items.length)
+
+        for (var item in items) {
+            let current = items[item]
+            let div = document.createElement("div")
+            total += current.Cena
+
+            let a = `<div class="container px-4 px-lg-5 mb-4">
+                            <div class="row gx-4 gx-lg-5 align-items-center">
+                                <div class="col-md-6">
+                                    <img class="card-img-top mb-5 mb-md-0" src="${current.Slika}", alt="..." />
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small mb-1">
+                                        <h1 class="fw-bolder">${current.Naziv}</h1>
+                                    </div>
+                                    <div class="fs-5 mb-5">
+                                        <span>Cena: ${current.Cena} RSD</span> <br />
+                                        <span>Godina: ${current.Godine} god.</span> <br />
+                                        <span>Pakovanje: ${current.Pakovanje}</span> <br />
+                                        <span>Tip: ${current.Tip}</span> <br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />`
+
+            div.innerHTML = a
+            list.appendChild(div)
+        }
+
+        document.getElementById('ukupnaCenaTekst').textContent = total
+    }
+
+    updateShopingCartCount()
+</script>

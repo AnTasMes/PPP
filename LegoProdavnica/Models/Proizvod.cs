@@ -27,7 +27,7 @@ public partial class Proizvod
 
     public virtual ICollection<RacunProizvod> RacunProizvods { get; } = new List<RacunProizvod>();
 
-    public virtual ICollection<Recenzija> Recenzijas { get; set; } = new List<Recenzija>();
+    public virtual ICollection<Recenzija> Recenzijas { get; set;  } = new List<Recenzija>();
 
     public virtual ICollection<Rezervacija> Rezervacijas { get; } = new List<Rezervacija>();
 }
