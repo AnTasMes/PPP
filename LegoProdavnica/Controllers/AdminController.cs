@@ -90,6 +90,7 @@ namespace LegoProdavnica.Controllers {
             _context.Profils.Add(model);
             _context.SaveChanges();
 
+
             return RedirectToAction("ListEmployees");
         }
     }
