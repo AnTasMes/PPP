@@ -5,51 +5,126 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script>
+    function getCookie(name) {
+        const cookie = decodeURIComponent(document.cookie)
+        const value = `; ${cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    function updateShopingCartCount() {
+        var itemsCookie = getCookie('items')
+        var items = JSON.parse(itemsCookie)
+        document.getElementById('shoppingCarCount').textContent = items.length
+    }
+
+    function updateShoppingCart() {
+        var itemsCookie = getCookie('items')
+        var items = JSON.parse(itemsCookie)
+
+        updateShopingCartCount()
+
+        var list = document.getElementById('cartDisplayList')
+
+
+        for (var item in items) {
+            let current = items[item]
+            let div = document.createElement("div")
+
+            let a = `<div class="container px-4 px-lg-5 mb-4">
+                            <div class="row gx-4 gx-lg-5 align-items-center">
+                                <div class="col-md-6">
+                                    <img class="card-img-top mb-5 mb-md-0" src="${current.Slika}", alt="..." />
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="small mb-1">
+                                        <h1 class="fw-bolder">${current.Naziv}</h1>
+                                    </div>
+                                    <div class="fs-5 mb-5">
+                                        <span>Cena: ${current.Cena} RSD</span> <br />
+                                        <span>Godina: ${current.Godine} god.</span> <br />
+                                        <span>Pakovanje: ${current.Pakovanje}</span> <br />
+                                        <span>Tip: ${current.Tip}</span> <br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />`
+
+            div.innerHTML = a
+            list.appendChild(div)
+        }
+    }
+
+    updateShopingCartCount()
+</script>
+
 <section class="py-5">
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6">
-                <img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg", alt="..." />
+                <img class="card-img-top mb-5 mb-md-0" src="@Model.Slika", alt="..." />
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 mt-4">
                 <div class="small mb-1">
-                    <h1 class="display-5 fw-bolder">Some product</h1>
+                    <h1 class="display-5 fw-bolder">@Model.Naziv</h1>
                 </div>
-                <div class="fs-5 mb-5">
-                    <span class="text-decoration-line-through">$300.00</span>
-                    <span>$220.00</span>
+                <hr>
+                <div class="fs-5">
+                    <span>Cena: @Model.Cena RSD</span>
                 </div>
-                <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing 
-                    elit. Praesentium at dolorem quidem modi. 
-                    Nam sequi consequatur obcaecati excepturi alias magni, accusamus 
-                    eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
-                   
-                <div class="d-flex">
-                    <input class="form-control text-center me-3" type="number" value="1" style="max-width: 3rem;"/>
-                    <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                        <i class="bi-cart-fill me-1"> Add to cart</i>
-                    </button>
+                <div class="fs-5">
+                    <span>Pakovanje: @Model.Pakovanje</span>
+                </div>
+                <div class="fs-5">
+                    <span>Godine: @Model.Godine</span>
+                </div>
+                <div class="fs-5">
+                    <span>Tip: @Model.Tip</span>
                 </div>
             </div>
         </div>
+        <button type="button" class="btn btn-outline-primary cartBtn mt-2" onclick="location.href='@Url.Action("addToCart", "Proizvod", Model)'" >Dodaj u korpu</button>
     </div>
 </section>
+<hr />
 <section class="py-5">
     <div class="container px-4 px-lg-5">
+        <h2>Ocene</h2>
+        <br />
+        <button type="button" class="btn btn-outline-primary cartBtn mb-2" onclick="location.href='@Url.Action("addToCart", "Proizvod", Model)'" >Oceni</button>
+        <input type="number" min="1" max="5" id="ocena" value="1"/>
         <div class="row">
             <div id="accordion">
                 <div class="card">
                     <div class="card-header">
                         <h5 class="mb-0">
                         <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                          Collapsible Group Item #1
+                          Otvori
                         </button>
                       </h5>
                     </div>
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                      <div class="card-body">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                      </div>
+                        <div class="card-body">
+                            @foreach (var rec in Model.Recenzijas) {
+                                <div class="card p-2 ml-2">
+                                    <div class="row">
+                                        <div class="col-2 text-center">
+                                            @rec.DatumKreacija
+                                        </div>
+                                        <div class="col-4 text-center">
+                                            <div class="h5 ml-2">@rec.Korisnik.KorisnickoIme</div>
+                                        </div>
+                                        <div class="col-3 text-center"></div>
+                                        <div class="col-3 text-center">
+                                            @rec.Ocena / 5
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            }
+                        </div>
                     </div>
                   </div>
                 </div>

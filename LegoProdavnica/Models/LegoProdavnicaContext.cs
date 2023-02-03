@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace LegoProdavnica.Models;
 
-public partial class LegoProdavnicaContext : DbContext
-{
-    public LegoProdavnicaContext()
-    {
+public partial class LegoProdavnicaContext : DbContext {
+    public LegoProdavnicaContext() {
     }
 
     public LegoProdavnicaContext(DbContextOptions<LegoProdavnicaContext> options)
-        : base(options)
-    {
+        : base(options) {
     }
 
     public virtual DbSet<Narudzbina> Narudzbinas { get; set; }
@@ -33,13 +28,11 @@ public partial class LegoProdavnicaContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=ANTASMES-PC\\ANTASMES_SERVER;DataBase=LegoProdavnica;Integrated Security=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=JOVAN-DESKTOP;DataBase=LegoProdavnica;Integrated Security=True;TrustServerCertificate=True");
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Narudzbina>(entity =>
-        {
-            entity.HasKey(e => e.NarudzbinaId).HasName("PK__Narudzbi__282329EFA78C9D3B");
+    protected override void OnModelCreating(ModelBuilder modelBuilder) {
+        modelBuilder.Entity<Narudzbina>(entity => {
+            entity.HasKey(e => e.NarudzbinaId).HasName("PK__Narudzbi__282329EF1DF5C673");
 
             entity.ToTable("Narudzbina");
 
@@ -61,13 +54,12 @@ public partial class LegoProdavnicaContext : DbContext
                 .HasConstraintName("FK__Narudzbin__Proiz__38996AB5");
         });
 
-        modelBuilder.Entity<Profil>(entity =>
-        {
-            entity.HasKey(e => e.ProfilId).HasName("PK__Profil__5E0A2D9D011172A7");
+        modelBuilder.Entity<Profil>(entity => {
+            entity.HasKey(e => e.ProfilId).HasName("PK__Profil__5E0A2D9DCE216678");
 
             entity.ToTable("Profil");
 
-            entity.HasIndex(e => e.KorisnickoIme, "UQ__Profil__992E6F928A35C5E9").IsUnique();
+            entity.HasIndex(e => e.KorisnickoIme, "UQ__Profil__992E6F929BAC0A57").IsUnique();
 
             entity.Property(e => e.ProfilId).HasColumnName("ProfilID");
             entity.Property(e => e.Email)
@@ -92,9 +84,8 @@ public partial class LegoProdavnicaContext : DbContext
                 .HasConstraintName("FK__Profil__Email__2A4B4B5E");
         });
 
-        modelBuilder.Entity<Proizvod>(entity =>
-        {
-            entity.HasKey(e => e.ProizvodId).HasName("PK__Proizvod__21A8BE18FBCE99F4");
+        modelBuilder.Entity<Proizvod>(entity => {
+            entity.HasKey(e => e.ProizvodId).HasName("PK__Proizvod__21A8BE18D7552233");
 
             entity.ToTable("Proizvod");
 
@@ -121,9 +112,8 @@ public partial class LegoProdavnicaContext : DbContext
                 .IsUnicode(false);
         });
 
-        modelBuilder.Entity<Racun>(entity =>
-        {
-            entity.HasKey(e => e.RacunId).HasName("PK__Racun__07B8F7AC4A304173");
+        modelBuilder.Entity<Racun>(entity => {
+            entity.HasKey(e => e.RacunId).HasName("PK__Racun__07B8F7ACDBB4785F");
 
             entity.ToTable("Racun");
 
@@ -146,9 +136,8 @@ public partial class LegoProdavnicaContext : DbContext
                 .HasConstraintName("FK__Racun__RadnikID__2D27B809");
         });
 
-        modelBuilder.Entity<RacunProizvod>(entity =>
-        {
-            entity.HasKey(e => new { e.RacunId, e.ProizvodId }).HasName("PK__Racun_Pr__95A27C4D688F5621");
+        modelBuilder.Entity<RacunProizvod>(entity => {
+            entity.HasKey(e => new { e.RacunId, e.ProizvodId }).HasName("PK__Racun_Pr__95A27C4D13A38219");
 
             entity.ToTable("Racun_Proizvod");
 
@@ -167,9 +156,8 @@ public partial class LegoProdavnicaContext : DbContext
                 .HasConstraintName("FK__Racun_Pro__Racun__30F848ED");
         });
 
-        modelBuilder.Entity<Recenzija>(entity =>
-        {
-            entity.HasKey(e => e.RecenzijaId).HasName("PK__Recenzij__D36C60904B1D6B82");
+        modelBuilder.Entity<Recenzija>(entity => {
+            entity.HasKey(e => e.RecenzijaId).HasName("PK__Recenzij__D36C6090D7C5D72E");
 
             entity.ToTable("Recenzija");
 
@@ -191,9 +179,8 @@ public partial class LegoProdavnicaContext : DbContext
                 .HasConstraintName("FK__Recenzija__Proiz__3E52440B");
         });
 
-        modelBuilder.Entity<Rezervacija>(entity =>
-        {
-            entity.HasKey(e => e.RezervacijaId).HasName("PK__Rezervac__CABA44FD0ACEE3BC");
+        modelBuilder.Entity<Rezervacija>(entity => {
+            entity.HasKey(e => e.RezervacijaId).HasName("PK__Rezervac__CABA44FD67B5F96F");
 
             entity.ToTable("Rezervacija");
 
@@ -212,9 +199,8 @@ public partial class LegoProdavnicaContext : DbContext
                 .HasConstraintName("FK__Rezervaci__Proiz__34C8D9D1");
         });
 
-        modelBuilder.Entity<Uloga>(entity =>
-        {
-            entity.HasKey(e => e.UlogaId).HasName("PK__Uloga__DCAB23EB0A978F8A");
+        modelBuilder.Entity<Uloga>(entity => {
+            entity.HasKey(e => e.UlogaId).HasName("PK__Uloga__DCAB23EB48DE9A30");
 
             entity.ToTable("Uloga");
 

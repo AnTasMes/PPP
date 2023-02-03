@@ -1,343 +1,322 @@
 ﻿@model IEnumerable<LegoProdavnica.Models.Proizvod>
 
 @{
-    ViewData["Title"] = "IndexProduct";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "IndexProduct";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <style>
-    .card{
-        position: relative;
-        overflow: hidden;
-        z-index: 1;
-        
-    }
-    .card-image-holder{
-        background-color: black;
-        position: relative;
-        overflow: hidden;
-        z-index: 1;
-    }
+	.card{
+		position: relative;
+		overflow: hidden;
+		z-index: 1;
 
-    /*.card:hover::after {opacity: 0.2;}*/
+	}
+	.card-image-holder{
+		background-color: black;
+		position: relative;
+		overflow: hidden;
+		z-index: 1;
+	}
 
-    img {transition: .7s ease all; width: 100%; object-fit:cover;}
-    .card:hover img {
-      opacity: 0.8;
-      transform: scale(1.1);
-    }
+	/*.card:hover::after {opacity: 0.2;}*/
 
-    .card-img-top{
-        width: 100%;
-        height: 300px;
-    }
+	img {transition: .7s ease all; width: 100%; object-fit:cover;}
+	.card:hover img {
+	  opacity: 0.8;
+	  transform: scale(1.1);
+	}
+
+	.card-img-top{
+		width: 100%;
+		height: 300px;
+	}
 
 
-    .card:after{
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background: #e5e5e5;
-        opacity: 0;
-        transition: .9s ease all;
-    }
+	.card:after{
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background: #e5e5e5;
+		opacity: 0;
+		transition: .9s ease all;
+	}
 
-    .card-image-holder:after{
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background: #e5e5e5;
-        opacity: 0;
-        transition: .9s ease all;
-    }
-    .prTitle{
-        text-decoration: none;
-        color: black;
-        transition: all .5s;
-    }
+	.card-image-holder:after{
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background: #e5e5e5;
+		opacity: 0;
+		transition: .9s ease all;
+	}
+	.prTitle{
+		text-decoration: none;
+		color: black;
+		transition: all .5s;
+	}
 
-    .cartBtn{
-        z-index:999;
-        position: relative;
-    }
+	.cartBtn{
+		z-index:999;
+		position: relative;
+	}
 
-    .prTitle:hover,
-    .prTitle:focus {
-      background-size: 0 0.1em, 100% 0.1em;
-      color: black;
-      cursor: pointer
-    }
+	.prTitle:hover,
+	.prTitle:focus {
+	  background-size: 0 0.1em, 100% 0.1em;
+	  color: black;
+	  cursor: pointer
+	}
 
-    .carousel-item{
-        height: 35rem;
-        background: black;
-    }
+	.carousel-item{
+		height: 35rem;
+		background: black;
+	}
 
-    .overlay-image{
-        opacity: 0.5;
-    }
+	.overlay-image{
+		opacity: 0.5;
+	}
 
-    .containerV{
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding-bottom: 50px;
-        padding-left: 20%;
-        padding-right: 20%;
-        z-index: 999;
-        color: white;
-    }
+	.containerV{
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		padding-bottom: 50px;
+		padding-left: 20%;
+		padding-right: 20%;
+		z-index: 999;
+		color: white;
+	}
 
-    .close{
-        transition: all 0.2s;
-    }
+	.close{
+		transition: all 0.2s;
+	}
 
-    .close:hover{
-        transition: all 0.3s;
-        transform: scale(1.9);
-    }
+	.close:hover{
+		transition: all 0.3s;
+		transform: scale(1.9);
+	}
 
-    .btn-outline-warning:hover{
-        color:white;
-    }
+	.btn-outline-warning:hover{
+		color:white;
+	}
 
-    .hover-underline-animation {
-      display: inline-block;
-      position: relative;
-      color: #73b6ff;
-    }
+	.hover-underline-animation {
+	  display: inline-block;
+	  position: relative;
+	  color: #73b6ff;
+	}
 
-    .hover-underline-animation::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      transform: scaleX(0);
-      height: 2px;
-      bottom: 0;
-      left: 0;
-      background-color: #73b6ff;
-      transform-origin: bottom right;
-      transition: transform 0.25s ease-out;
-    }
+	.hover-underline-animation::after {
+	  content: '';
+	  position: absolute;
+	  width: 100%;
+	  transform: scaleX(0);
+	  height: 2px;
+	  bottom: 0;
+	  left: 0;
+	  background-color: #73b6ff;
+	  transform-origin: bottom right;
+	  transition: transform 0.25s ease-out;
+	}
 
-    .hover-underline-animation:hover::after {
-      transform: scaleX(1);
-      transform-origin: bottom left;
-    }
+	.hover-underline-animation:hover::after {
+	  transform: scaleX(1);
+	  transform-origin: bottom left;
+	}
 
-    .light-outline{
-        color: white;
-    }
-    
+	.light-outline{
+		color: white;
+	}
+
 </style>
 
 <script>
-    function updateShoppingCart() {
-        var itemsStorage2 = localStorage.getItem('items');
-        var itemsJson2 = {}
+	function getCookie(name) {
+		const cookie = decodeURIComponent(document.cookie)
+		const value = `; ${cookie}`;
+		const parts = value.split(`; ${name}=`);
+		if (parts.length === 2) return parts.pop().split(';').shift();
+	}
 
-        if (itemsStorage2) {
-            itemsJson2 = JSON.parse(itemsStorage2)
-        }
+	function updateShopingCartCount() {
+		var itemsCookie = getCookie('items')
+		var items = JSON.parse(itemsCookie)
+		document.getElementById('shoppingCarCount').textContent = items.length
+	}
 
-        var list = document.getElementById('cartDisplayList')
+	function updateShoppingCart() {
+		var itemsCookie = getCookie('items')
+		var items = JSON.parse(itemsCookie)
 
-        var child = list.lastElementChild; 
-        while (child) {
-            list.removeChild(child);
-            child = list.lastElementChild;
-        }
+		updateShopingCartCount()
 
-        var index = 0
+		var list = document.getElementById('cartDisplayList')
 
-        for (var item in itemsJson2) {
-            let current = itemsJson2[item]
-            let div = document.createElement("div")
-       
-            let a = `<div class="container px-4 px-lg-5 mb-4">
-                            <div class="row gx-4 gx-lg-5 align-items-center">
-                                <div class="col-md-6">
-                                    <img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg", alt="..." />
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="small mb-1">
-                                        <h1 class="fw-bolder">${current.naziv}</h1>
-                                    </div>
-                                    <div class="fs-5 mb-5">
-                                        <span>Cena: ${current.cena} RSD</span> <br />
-                                        <span>Godina: ${current.godine} god.</span> <br />
-                                        <span>Pakovanje: ${current.pakovanje}</span> <br />
-                                        <span>Tip: ${current.tip}</span> <br />
-                                        <span>Kolicina: ${current.count}</span> 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />`
 
-            div.innerHTML = a
-            list.appendChild(div)
-            index++
-        }
-    }
+		for (var item in items) {
+			let current = items[item]
+			let div = document.createElement("div")
 
-    function addToShoppingCart(id, naziv, godine, pakovanje, tip, cena) {
-        console.log("Add to shopping cart")
-        var itemsStorage = localStorage.getItem('items');
-        var itemsJson = {}
+			let a = `<div class="container px-4 px-lg-5 mb-4">
+							<div class="row gx-4 gx-lg-5 align-items-center">
+								<div class="col-md-6">
+									<img class="card-img-top mb-5 mb-md-0" src="${current.Slika}", alt="..." />
+								</div>
+								<div class="col-md-6">
+									<div class="small mb-1">
+										<h1 class="fw-bolder">${current.Naziv}</h1>
+									</div>
+									<div class="fs-5 mb-5">
+										<span>Cena: ${current.Cena} RSD</span> <br />
+										<span>Godina: ${current.Godine} god.</span> <br />
+										<span>Pakovanje: ${current.Pakovanje}</span> <br />
+										<span>Tip: ${current.Tip}</span> <br />
+									</div>
+								</div>
+							</div>
+						</div>
+						<hr />`
 
-        if (itemsStorage) {
-            itemsJson = JSON.parse(itemsStorage)
-        }
+			div.innerHTML = a
+			list.appendChild(div)
+		}
+	}
 
-        var name = 'proizvod' + id
-
-        if (!isNaN(itemsJson[name])) {
-            itemsJson[name] = {}
-            itemsJson[name].count = 0
-        }
-
-        itemsJson[name].count++
-        itemsJson[name].id = id
-        itemsJson[name].naziv = naziv
-        itemsJson[name].godine = godine
-        itemsJson[name].pakovanje = pakovanje
-        itemsJson[name].tip = tip
-        itemsJson[name].cena = cena
-        console.log(itemsJson[name].count)
-        localStorage.setItem('items', JSON.stringify(itemsJson))
-
-        document.getElementById('shoppingCarCount').textContent = Object.keys(itemsJson).length
-        updateShoppingCart()
-    }
-
-    window.onload = function() {
-      updateShoppingCart();
-    };
+	updateShopingCartCount()
 </script>
 
-    <div id="carouselExampleControls" class="carousel slide carousel-fade crsl" data-bs-ride="carousel">
-        <div class="carousel-inner">
-        <div class="carousel-item active">
-            <div class="containerV">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Nam quis quam in augue ullamcorper ullamcorper nec quis erat. 
-                        Nunc ultricies diam in purus egestas, sit amet 
-                        placerat ligula sollicitudin.</p>
-                        <a href="#" class="btn btn-dark">Learn more</a>
-            </div>     
-            <div>
-                <img class="overlay-image" src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"  alt="First slide">
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div class="containerV">
-                <p>Sit amet 
-                        placerat ligula sollicitudin.</p>
-                        <a href="#" class="btn btn-outline-dark light-outline">Learn more</a>
-            </div>     
-            <div>
-            <img class="overlay-image" src="https://images.unsplash.com/photo-1560961911-293cfd783727?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80" alt="Second slide">
-            </div>
-        </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only"></span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only"></span>
-        </a>
-    </div>
+	<div id="carouselExampleControls" class="carousel slide carousel-fade crsl" data-bs-ride="carousel">
+		<div class="carousel-inner">
+		<div class="carousel-item active">
+			<div class="containerV">
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+						Nam quis quam in augue ullamcorper ullamcorper nec quis erat. 
+						Nunc ultricies diam in purus egestas, sit amet 
+						placerat ligula sollicitudin.</p>
+						<a href="#" class="btn btn-dark">Learn more</a>
+			</div>     
+			<div>
+				<img class="overlay-image" src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"  alt="First slide">
+			</div>
+		</div>
+		<div class="carousel-item">
+			<div class="containerV">
+				<p>Sit amet 
+						placerat ligula sollicitudin.</p>
+						<a href="#" class="btn btn-outline-dark light-outline">Learn more</a>
+			</div>     
+			<div>
+			<img class="overlay-image" src="https://images.unsplash.com/photo-1560961911-293cfd783727?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80" alt="Second slide">
+			</div>
+		</div>
+		</div>
+		<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="sr-only"></span>
+		</a>
+		<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="sr-only"></span>
+		</a>
+	</div>
 
 <br />
 <br />
 
 <div class="container">
-    @using(Html.BeginForm("Filter", "Proizvod", FormMethod.Post))
-    {
-        <div class="row row-cols-3"> 
-                <div class="col">
-                    <select class="form-control form-select" id="order" name="order">
-                        <option value="ascending">Cene rastuce</option>
-                        <option value="descending">Cene opadajuce</option>
-                    </select>
-                </div>
-                <div class="col"></div>
-                <div class="col">
-                    <div class="input-group mb-3">
-                      <input id="name" name="name" type="text" class="form-control" placeholder="Unesite naziv..." aria-label="Unesite naziv..." aria-describedby="basic-addon2">
-                      <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit">Pretrazi</button>
-                      </div>
-                    </div>
-                </div>
-        </div>
-    }
+	@using (Html.BeginForm("Filter", "Proizvod", FormMethod.Post)) {
+			<div class="row row-cols-3"> 
+					<div class="col">
+						<select class="form-control form-select" id="order" name="order">
+							<option value="ascending">Cene rastuce</option>
+							<option value="descending">Cene opadajuce</option>
+						</select>
+					</div>
+					<div class="col"></div>
+					<div class="col">
+						<div class="input-group mb-3">
+						  <input id="name" name="name" type="text" class="form-control" placeholder="Unesite naziv..." aria-label="Unesite naziv..." aria-describedby="basic-addon2">
+						  <div class="input-group-append">
+							<button class="btn btn-outline-secondary" type="submit">Pretrazi</button>
+						  </div>
+						</div>
+					</div>
+			</div>
+	}
+
 
 <h3 class="display-5 mt-6">Recommended For You</h3>
 
-    <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
-        @foreach (var item in Model)
-        {
+	<div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+		@foreach (var item in Model) {
 
-        string fName = "detailedProduct" + item.ProizvodId;
-        
-           
-        <div class="col">
-        <div class="card">
-            <div class="card-image-holder">
-              <img src="@item.Slika" class="card-img-top" alt="@item.Naziv" />
-            </div>
-          <div class="card-body">
-              @*Modalni prozori moraju da se promene nekako da bude posebno za svaki proizvod, ali to cemo da vidimo kako jos*@
-            <h5 class="card-title hover-underline-animation"><a data-bs-toggle="modal" data-bs-target="#@fName" class="stretched-link prTitle " style="position: relative;">@item.Naziv</a></h5>
-            <p class="card-text font-weight-bold">
-              @item.Cena RSD
-            </p>
-                <a  class="btn btn-outline-primary cartBtn" onclick="addToShoppingCart(@item.ProizvodId, '@item.Naziv', @item.Godine, '@item.Pakovanje', '@item.Tip', '@item.Cena')"><i class="bi-cart-fill me-1"> Add to cart</i></a>
-          </div>
-        </div>
-      </div>
+			string fName = "detailedProduct" + item.ProizvodId;
+			<div class="col">
+			<div class="card">
+				<div class="card-image-holder">
+				  <img src="@item.Slika" class="card-img-top" alt="@item.Naziv" />
+				</div>
+			  <div class="card-body">
+						@*Modalni prozori moraju da se promene nekako da bude posebno za svaki proizvod, ali to cemo da vidimo kako jos*@
+				<h5 class="card-title hover-underline-animation"><a data-bs-toggle="modal" data-bs-target="#@fName" class="stretched-link prTitle " style="position: relative;">@item.Naziv</a></h5>
+				<p class="card-text font-weight-bold">
+							@item.Cena RSD
+				</p>
 
-        <div class="modal fade" id="@fName" role="dialog">
-        <div class="modal-dialog modal-xl">
-             <div class="modal-content">
-                 <div class="modal-header d-flex justify-content-end">
-                     <button type="button" class="close bg-transparent border-0" data-bs-dismiss="modal" aria-label="Close"><span class="lead" aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container px-4 px-lg-5 mb-4">
-                        <div class="row gx-4 gx-lg-5 align-items-center">
-                            <div class="col-md-6">
-                                <img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg", alt="..." />
-                            </div>
-                            <div class="col-md-6">
-                                <div class="small mb-1">
-                                    <h1 class="display-5 fw-bolder">@item.Naziv</h1>
-                                </div>
-                                <div class="d-flex ml-10 mr-0 p-2">
-                                    <a class="btn btn-outline-warning" type="button" asp-controller="Proizvod" asp-action="DetailedView"><i class="bi bi-star"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-        }
-    </div>
+				<button type="button" class="btn btn-outline-primary cartBtn" onclick="location.href='@Url.Action("addToCart", "Proizvod", @item)'" >Dodaj u korpu</button>
+			  </div>
+			</div>
+		  </div>
+
+			<div class="modal fade" id="@fName" role="dialog">
+			<div class="modal-dialog modal-xl">
+				 <div class="modal-content">
+					 <div class="modal-header d-flex">
+						<h2>Proizvod</h2>
+						<div class="justify-content-end">
+							<button type="button" class="close bg-transparent border-0" data-bs-dismiss="modal" aria-label="Close"><span class="lead" aria-hidden="true">&times;</span></button>
+						</div>
+					</div>
+					<div class="modal-body">
+						<div class="container px-4 px-lg-5 mb-4">
+							<div class="row gx-4 gx-lg-5 align-items-center">
+								<div class="col-md-6">
+									<img class="card-img-top mb-5 mb-md-0" src="@item.Slika", alt="..." />
+								</div>
+								<div class="col-md-6">
+									<div class="small mb-1">
+										<h1 class="display-5 fw-bolder">@item.Naziv</h1>
+										<h4 class="fw-bolder">@item.Cena RSD</h4>
+									</div>
+									<div class="d-flex ml-10 mr-0 p-2">
+										<div class="p-2">
+											<button type="button" class="btn btn-outline-primary cartBtn" onclick="location.href='@Url.Action("addToCart", "Proizvod", @item)'" >Kupi</button>
+										</div>
+										<div class="p-2">
+											<button type="button" class="btn btn-outline-primary cartBtn" onclick="location.href='@Url.Action("addToCart", "Proizvod", @item)'" >Rezervisi</button>
+										</div>
+										<div class="p-2">
+											<button type="button" class="btn btn-outline-primary cartBtn" onclick="location.href='@Url.Action("addToCart", "Proizvod", @item)'" >Naruci</button>
+										</div>
+										<div class="p-2">
+											<button type="button" class="btn btn-outline-primary cartBtn" onclick="location.href='@Url.Action("DetailedView", "Proizvod", @item)'" >Detaljno</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		}
+	</div>
 </div>
-
-
-
-
