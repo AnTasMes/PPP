@@ -1,5 +1,6 @@
 ﻿using LegoProdavnica.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace LegoProdavnica.Controllers
 {
@@ -29,11 +30,6 @@ namespace LegoProdavnica.Controllers
         public IActionResult GetAllProducts()
         {
             return View("IndexProduct", _context.Proizvods.ToList<Proizvod>());
-        }
-
-        public IActionResult DetailedView()
-        {
-            return View();
         }
 
         public IActionResult ViewTest()
@@ -134,6 +130,104 @@ namespace LegoProdavnica.Controllers
             return RedirectToAction("List");
         }
 
+        public IActionResult DetailedView(Proizvod item)
+        {
+            var recs = _context.Recenzijas.Where(r => r.ProizvodId == item.ProizvodId).ToList();
 
+            foreach (var r in recs)
+            {
+                r.Korisnik = _context.Profils.FirstOrDefault(p => p.ProfilId == r.KorisnikId);
+            }
+
+            item.Recenzijas = recs;
+
+            return View(item);
+        }
+
+        public IActionResult buyCart()
+        {
+            List<Proizvod> items = new List<Proizvod>();
+            string? itemsCookie = "";
+            Request.Cookies.TryGetValue("items", out itemsCookie);
+
+            if (itemsCookie != null)
+            {
+                items = JsonConvert.DeserializeObject<List<Proizvod>>(itemsCookie);
+            }
+
+            if (items.Count > 0)
+            {
+                Racun racun = new Racun();
+                decimal? ukupnaCena = 0;
+                List<RacunProizvod> rps = new List<RacunProizvod>();
+
+                foreach (var i in items)
+                {
+                    ukupnaCena += i.Cena;
+                }
+
+                racun.UkupnaCena = ukupnaCena;
+
+                try
+                {
+                    _context.Racuns.Add(racun);
+                    _context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
+
+                }
+
+
+                foreach (var i in items)
+                {
+                    RacunProizvod rp = new RacunProizvod();
+                    rp.RacunId = racun.RacunId;
+                    rp.ProizvodId = i.ProizvodId;
+                    rp.DatumDodavanja = DateTime.Now;
+
+                    rps.Add(rp);
+                }
+
+
+                try
+                {
+                    foreach (var item in rps)
+                    {
+                        _context.RacunProizvods.Add(item);
+                    }
+
+                    _context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
+                }
+            }
+
+            Response.Cookies.Delete("items");
+
+            return View("IndexProduct", _context.Proizvods.ToList<Proizvod>());
+        }
+
+        public IActionResult addToCart(Proizvod item)
+        {
+            List<Proizvod> items = new List<Proizvod>();
+            string? itemsCookie = "";
+            Request.Cookies.TryGetValue("items", out itemsCookie);
+
+            if (itemsCookie != null)
+            {
+                items = JsonConvert.DeserializeObject<List<Proizvod>>(itemsCookie);
+            }
+
+            items.Add(item);
+            string serialized = JsonConvert.SerializeObject(items);
+            Response.Cookies.Delete("items");
+            Response.Cookies.Append("items", serialized);
+
+            return View("IndexProduct", _context.Proizvods.ToList<Proizvod>());
+        }
     }
 }

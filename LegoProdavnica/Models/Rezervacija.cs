@@ -1,6 +1,10 @@
-﻿namespace LegoProdavnica.Models;
+﻿using System;
+using System.Collections.Generic;
 
-public partial class Rezervacija {
+namespace LegoProdavnica.Models;
+
+public partial class Rezervacija
+{
     public int RezervacijaId { get; set; }
 
     public DateTime? DatumKreacije { get; set; }
