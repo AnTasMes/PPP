@@ -44,7 +44,9 @@ public partial class LegoProdavnicaContext : DbContext
             entity.ToTable("Narudzbina");
 
             entity.Property(e => e.NarudzbinaId).HasColumnName("NarudzbinaID");
-            entity.Property(e => e.Adresa).HasColumnType("datetime");
+            entity.Property(e => e.Adresa)
+                .HasMaxLength(50)
+                .IsUnicode(false);
             entity.Property(e => e.DatumDostave).HasColumnType("datetime");
             entity.Property(e => e.DatumKreacije).HasColumnType("datetime");
             entity.Property(e => e.KorisnikId).HasColumnName("KorisnikID");

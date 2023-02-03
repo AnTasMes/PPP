@@ -47,6 +47,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Programming/C\#/LegoProdavnica/src/PPP/LegoProdavnica/Views/Narudzbina/Cancel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmFydWR6YmluYVxDYW5jZWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Programming/C\#/LegoProdavnica/src/PPP/LegoProdavnica/Views/Narudzbina/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmFydWR6YmluYVxMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Programming/C\#/LegoProdavnica/src/PPP/LegoProdavnica/Views/Profil/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -59,12 +67,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlsXFJlZ2lzdGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Programming/C\#/LegoProdavnica/src/PPP/LegoProdavnica/Views/Proizvod/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvaXp2b2RcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Programming/C\#/LegoProdavnica/src/PPP/LegoProdavnica/Views/Proizvod/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvaXp2b2RcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Programming/C\#/LegoProdavnica/src/PPP/LegoProdavnica/Views/Proizvod/DetailedView.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvaXp2b2RcRGV0YWlsZWRWaWV3LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Programming/C\#/LegoProdavnica/src/PPP/LegoProdavnica/Views/Proizvod/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvaXp2b2RcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Programming/C\#/LegoProdavnica/src/PPP/LegoProdavnica/Views/Proizvod/IndexProduct.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvaXp2b2RcSW5kZXhQcm9kdWN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Programming/C\#/LegoProdavnica/src/PPP/LegoProdavnica/Views/Proizvod/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvaXp2b2RcTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Programming/C\#/LegoProdavnica/src/PPP/LegoProdavnica/Views/Proizvod/ViewTest.cshtml]

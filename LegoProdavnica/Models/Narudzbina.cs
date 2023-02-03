@@ -11,7 +11,7 @@ public partial class Narudzbina
 
     public DateTime? DatumDostave { get; set; }
 
-    public DateTime? Adresa { get; set; }
+    public string? Adresa { get; set; }
 
     public int? KorisnikId { get; set; }
 

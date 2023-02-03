@@ -14,6 +14,18 @@ namespace LegoProdavnica.Controllers
             return View(proizvodi);
         }
 
+        public IActionResult Edit(int id)
+        {
+            var proizvod = _context.Proizvods.FirstOrDefault(p => p.ProizvodId == id);
+
+            if(proizvod == null)
+            {
+                return RedirectToAction("List");
+            }
+
+            return View(proizvod);
+        }
+
         public IActionResult GetAllProducts()
         {
             return View("IndexProduct", _context.Proizvods.ToList<Proizvod>());
@@ -26,7 +38,50 @@ namespace LegoProdavnica.Controllers
 
         public IActionResult ViewTest()
         {
-            return View(_context.Proizvods.ToList());
+            return View(_context.Proizvods.ToList<Proizvod>());
+        }
+
+        public IActionResult List()
+        {
+            return View(_context.Proizvods.ToList<Proizvod>());
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var proizvod = _context.Proizvods.FirstOrDefault<Proizvod>(p => p.ProizvodId == id);
+
+            if(proizvod == null)
+            {
+                return RedirectToAction("List");
+            }
+
+            return View(proizvod);
+        }
+
+        [HttpPost]
+        public IActionResult Create(Proizvod model)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Proizvods.Add(model);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("List");
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Proizvod model)
+        {
+            _context.Proizvods.Remove(model);
+            _context.SaveChanges();
+
+            return RedirectToAction("List");
         }
 
         [HttpPost]
@@ -53,6 +108,32 @@ namespace LegoProdavnica.Controllers
                 return View("IndexProduct", proizvodi);
             }
         }
+
+        [HttpPost]
+        public IActionResult Edit(Proizvod model)
+        {
+            if (model == null)
+            {
+                return View();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Proizvods.Update(model);
+                    _context.SaveChanges();
+                }
+                catch(Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
+                    return View(); //Ispisati da je doslo do greske
+                }
+            }
+
+            return RedirectToAction("List");
+        }
+
 
     }
 }
