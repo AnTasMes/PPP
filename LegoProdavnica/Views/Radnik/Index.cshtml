@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewData["Title"] = "IndexRadnik";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .card{
+        transition: all 0.2s;
+    }
+
+    .card-header{
+        transition: all 0.3s;
+    }
+
+    .card:hover .card-header{
+        background-color: #1e2125;
+        color: white;
+        transition: all 0.4s;
+    }
+
+    .card:hover{
+        transform: scale(1.01);
+        transition: all 0.2s;
+    }
+
+
+</style>
+
+<div class="container">
+    <div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card h-100">
+                    <div class="card-header text-center">
+                        <p class="display-6">Proizvodi</p>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Dodavanje i Azuriranje proizvoda</h5>
+                        <p class="card-text ">Ovde se vrši pregled svih proizvoda i omogućava se kreiranje novih ili izmena trenutnih</p>     
+                    </div>
+                    <div class="card-footer bg-transparent">
+                            <a asp-action="ListProizvoda" asp-controller="Radnik" class="btn btn-outline-dark w-100">Pokreni</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card h-100">
+                  <div class="card-header text-center">
+                        <p class="display-6">Korisnici</p>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Pregled korisnika</h5>
+                        <p class="card-text">Ovde je moguce pregledati sve korisnike i poslati im poruku</p>
+                    
+                    </div>
+                    <div class="card-footer bg-transparent">
+                            <a  asp-action="ListKorisnika" asp-controller="Radnik" class="btn btn-outline-dark w-100">Pokreni</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

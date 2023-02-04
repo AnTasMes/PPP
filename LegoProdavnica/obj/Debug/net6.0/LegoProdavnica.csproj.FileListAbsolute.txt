@@ -828,3 +828,6 @@ C:\Programming\CSharp\PPP\LegoProdavnica\obj\Debug\net6.0\refint\LegoProdavnica.
 C:\Programming\CSharp\PPP\LegoProdavnica\obj\Debug\net6.0\LegoProdavnica.pdb
 C:\Programming\CSharp\PPP\LegoProdavnica\obj\Debug\net6.0\LegoProdavnica.genruntimeconfig.cache
 C:\Programming\CSharp\PPP\LegoProdavnica\obj\Debug\net6.0\ref\LegoProdavnica.dll
+D:\Programming\C#\LegoProdavnica\src\PPP\LegoProdavnica\bin\Debug\net6.0\MailKit.dll
+D:\Programming\C#\LegoProdavnica\src\PPP\LegoProdavnica\bin\Debug\net6.0\MimeKit.dll
+D:\Programming\C#\LegoProdavnica\src\PPP\LegoProdavnica\bin\Debug\net6.0\BouncyCastle.Crypto.dll

@@ -7,6 +7,12 @@ namespace LegoProdavnica.Controllers
     public class ProizvodController : Controller
     {
         private LegoProdavnicaContext _context = new LegoProdavnicaContext();
+        private readonly IEmailSender _emailSender;
+
+        public ProizvodController(IEmailSender sender)
+        {
+            _emailSender = sender;
+        }
 
         [HttpPost]
         public IActionResult IndexProduct(List<Proizvod> proizvodi)
@@ -163,18 +169,39 @@ namespace LegoProdavnica.Controllers
 
                 foreach (var i in items)
                 {
+                    System.Diagnostics.Debug.WriteLine(i);
                     ukupnaCena += i.Cena;
                 }
 
                 racun.UkupnaCena = ukupnaCena;
+                racun.DatumIzdavanja = DateTime.Now;
+
+                // TODO: Dodati IdKorisnika ovde
 
                 try
                 {
                     _context.Racuns.Add(racun);
                     _context.SaveChanges();
+
+                    
                 }
                 catch (Exception ex)
                 {
+                    System.Diagnostics.Debug.WriteLine("Greska kod slanja poruke");
+
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
+                }
+
+                try
+                {
+                    System.Diagnostics.Debug.WriteLine("Slanje poruke");
+
+                    var message = new Message("akitasevski112@gmail.com", "Test buy email", "Ovo je poruka");
+
+                    _emailSender.SendEmail(message);
+                }catch(Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Greska kod slanja poruke");
                     System.Diagnostics.Debug.WriteLine(ex.Message);
 
                 }

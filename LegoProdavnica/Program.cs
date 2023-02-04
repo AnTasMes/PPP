@@ -1,9 +1,24 @@
+using LegoProdavnica;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+var emailConfig = builder.Configuration
+    .GetSection("EmailConfiguration")
+    .Get<EmailConfiguration>();
+
+System.Diagnostics.Debug.WriteLine(emailConfig.ToString());
+
+builder.Services.AddSingleton(emailConfig);
+
+builder.Services.AddControllers();
+
+builder.Services.AddScoped<IEmailSender, EmailSender>();
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment()) {

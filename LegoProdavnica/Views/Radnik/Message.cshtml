@@ -1,0 +1,57 @@
+﻿@model LegoProdavnica.Models.Profil
+
+@{
+    ViewData["Title"] = "Message";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Message</h1>
+
+<h4>Profil</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Send" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProfilId" readonly/>
+            <input type="hidden" asp-for="UlogaId" readonly/>
+            <div class="form-group">
+                <label asp-for="KorisnickoIme" class="control-label"></label>
+                <input asp-for="KorisnickoIme" class="form-control" readonly/>
+                <span asp-validation-for="KorisnickoIme" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ime" class="control-label"></label>
+                <input asp-for="Ime" class="form-control" readonly/>
+                <span asp-validation-for="Ime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Prezime" class="control-label"></label>
+                <input asp-for="Prezime" class="form-control" readonly/>
+                <span asp-validation-for="Prezime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" readonly/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Content" class="control-label">Naslov poruke</label>
+                <input class="form-control" name="Subject" placeholder="Enter subject...."/>
+            </div>
+            <div class="form-group">
+                <label for="Content" class="control-label"></label>
+                <textarea class="form-control" name="Content" placeholder="Write message...." ></textarea>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Send" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ListKorisnika">Back to List</a>
+</div>
+
