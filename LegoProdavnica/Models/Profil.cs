@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace LegoProdavnica.Models;
 
-namespace LegoProdavnica.Models;
-
-public partial class Profil
-{
+public partial class Profil {
     public int ProfilId { get; set; }
 
     public int? UlogaId { get; set; }

@@ -27,6 +27,17 @@
     </style>
 </head>
 
+@{
+    string userString = "";
+    bool result = Context.Request.Cookies.TryGetValue("token", out userString);
+    Profil user = new Profil();
+    user.UlogaId = -1;
+
+    if (result) {
+        user = JsonConvert.DeserializeObject<Profil>(userString);
+    }
+}
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -47,26 +58,24 @@
                          <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">O nama</a>
                         </li>
-                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="IndexAdmin">Admin dashboard</a>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Radnik" asp-action="Index">Radnik dashboard</a>
-                        </li>
+                        @if (user.UlogaId != -1) {
+                            @if(user.Uloga.Tip != "Korisnik") {
+                                @if(user.Uloga.Tip == "Admin") {
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="IndexAdmin">Admin dashboard</a>
+                                    </li>
+                                }
+                                @if(user.Uloga.Tip == "Radnik") {
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="" asp-controller="Radnik" asp-action="Index">Radnik dashboard</a>
+                                    </li>
+                                }
+                            }
+                        }
                     </ul>
                     @* Ovu sekciju treba srediti u slucaju da je korisnik ulogovan ili nije*@
                     <ul class="navbar-nav float-end">
                         @* Ako korisnik nije ulogovan*@
-
-                        @{
-                            string userString = "";
-                            bool result = Context.Request.Cookies.TryGetValue("token", out userString);
-                            Profil user = new Profil();
-                            user.UlogaId = -1;
-
-                            if (result) {
-                                user = JsonConvert.DeserializeObject<Profil>(userString);
-                            }
-                        }
 
                         @if (user.UlogaId == -1) {
                             <li class="nav-item m-lg-1">
@@ -148,7 +157,11 @@
                     <h3>  Ukupna cena: <span id="ukupnaCenaTekst">0</span> RSD</h3>
                 </div>
                 <div class="p-2 d-flex justify-content-center">
-                    <button type="button" class="btn btn-outline-primary btn-lg btn-block" onclick="location.href='@Url.Action("buyCart", "Proizvod")'" >Kupi</button>
+                    @if(user.UlogaId == -1) {
+                        <h3>Morate se ulogovati da bi mogli da kupite.</h3>
+                    } else {
+                        <button type="button" class="btn btn-outline-primary btn-lg btn-block" onclick="location.href='@Url.Action("buyCart", "Proizvod", user)'" >Kupi</button>    
+                    }
                 </div>
             </div>
         </div>

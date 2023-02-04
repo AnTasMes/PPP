@@ -5,67 +5,70 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>View</h1>
+<div class="container">
+    <h1>Lista proizvoda</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.AlteranteId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Naziv)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Godine)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Pakovanje)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tip)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cena)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NaStanju)
-            </th>
-            <th>Akcije</th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AlteranteId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Naziv)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Godine)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pakovanje)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tip)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cena)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NaStanju)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ProizvodId" class="btn-primary btn">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.ProizvodId" class="btn-danger btn">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <p>
+        <a asp-action="Create">Napravi novi</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                        @Html.DisplayNameFor(model => model.AlteranteId)
+                </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.Naziv)
+                </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.Godine)
+                </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.Pakovanje)
+                </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.Tip)
+                </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.Cena)
+                </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.NaStanju)
+                </th>
+                <th>Akcije</th>
+            </tr>
+        </thead>
+        <tbody>
+                @foreach (var item in Model) {
+                <tr>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.AlteranteId)
+                    </td>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.Naziv)
+                    </td>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.Godine)
+                    </td>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.Pakovanje)
+                    </td>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.Tip)
+                    </td>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.Cena)
+                    </td>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.NaStanju)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ProizvodId" class="btn-primary btn">Izmeni</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ProizvodId" class="btn-danger btn">Obrisi</a>
+                    </td>
+                </tr>
+                }
+        </tbody>
+    </table>
+
+</div>

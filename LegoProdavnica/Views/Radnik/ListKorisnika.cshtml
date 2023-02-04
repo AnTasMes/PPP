@@ -5,50 +5,53 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>ListKorisnika</h1>
+<div class="container">
+    <h1>Lista Korisnika</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.KorisnickoIme)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Prezime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                Posalji poruku
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.KorisnickoIme)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prezime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                <a asp-action="Message" asp-route-id="@item.ProfilId">Message</a> 
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <p>
+        <a asp-action="Create">Napravi novi</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                        @Html.DisplayNameFor(model => model.KorisnickoIme)
+                </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.Ime)
+                </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.Prezime)
+                </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    Posalji poruku
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+                @foreach (var item in Model) {
+                <tr>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.KorisnickoIme)
+                    </td>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.Ime)
+                    </td>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.Prezime)
+                    </td>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        <a asp-action="Message" asp-route-id="@item.ProfilId">Poruka</a> 
+                    </td>
+                </tr>
+                }
+        </tbody>
+    </table>
+
+</div>

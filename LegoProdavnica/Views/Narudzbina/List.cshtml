@@ -5,52 +5,55 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>List</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DatumKreacije)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DatumDostave)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Adresa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Korisnik)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Proizvod)
-            </th>
-            <th>
-                Akcija
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DatumKreacije)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DatumDostave)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Adresa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Korisnik.KorisnickoIme)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Proizvod.Naziv)
-            </td>
-            <td>
-                <a asp-action="Cancel" asp-route-id="@item.NarudzbinaId">Obustavi</a>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+<div class="container">
+    <h1>Lista narudzbina</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                        @Html.DisplayNameFor(model => model.DatumKreacije)
+                </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.DatumDostave)
+                </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.Adresa)
+                </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.Korisnik)
+                </th>
+                <th>
+                        @Html.DisplayNameFor(model => model.Proizvod)
+                </th>
+                <th>
+                    Akcija
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+                @foreach (var item in Model) {
+                <tr>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.DatumKreacije)
+                    </td>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.DatumDostave)
+                    </td>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.Adresa)
+                    </td>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.Korisnik.KorisnickoIme)
+                    </td>
+                    <td>
+                            @Html.DisplayFor(modelItem => item.Proizvod.Naziv)
+                    </td>
+                    <td>
+                        <a asp-action="Cancel" asp-route-id="@item.NarudzbinaId">Obustavi</a>
+                    </td>
+                </tr>
+                }
+        </tbody>
+    </table>
+
+</div>

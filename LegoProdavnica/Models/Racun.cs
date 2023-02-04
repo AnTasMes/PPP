@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace LegoProdavnica.Models;
 
-namespace LegoProdavnica.Models;
-
-public partial class Racun
-{
+public partial class Racun {
     public int RacunId { get; set; }
 
     public string? AlternateId { get; set; }
@@ -19,7 +15,7 @@ public partial class Racun
 
     public virtual Profil? Korisnik { get; set; }
 
-    public virtual ICollection<RacunProizvod> RacunProizvods { get; } = new List<RacunProizvod>();
+    public virtual ICollection<RacunProizvod> RacunProizvods { get; set; } = new List<RacunProizvod>();
 
     public virtual Profil? Radnik { get; set; }
 }

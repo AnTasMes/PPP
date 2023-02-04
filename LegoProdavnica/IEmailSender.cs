@@ -1,7 +1,5 @@
-﻿namespace LegoProdavnica
-{
-    public interface IEmailSender
-    {
+﻿namespace LegoProdavnica {
+    public interface IEmailSender {
         void SendEmail(Message message);
     }
 }

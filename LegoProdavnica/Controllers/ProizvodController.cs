@@ -2,106 +2,46 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace LegoProdavnica.Controllers
-{
-    public class ProizvodController : Controller
-    {
+namespace LegoProdavnica.Controllers {
+    public class ProizvodController : Controller {
         private LegoProdavnicaContext _context = new LegoProdavnicaContext();
         private readonly IEmailSender _emailSender;
 
-        public ProizvodController(IEmailSender sender)
-        {
+        public ProizvodController(IEmailSender sender) {
             _emailSender = sender;
         }
 
         [HttpPost]
-        public IActionResult IndexProduct(List<Proizvod> proizvodi)
-        {
+        public IActionResult IndexProduct(List<Proizvod> proizvodi) {
             System.Diagnostics.Debug.WriteLine("IndexProduct run");
             return View(proizvodi);
         }
 
-        public IActionResult Edit(int id)
-        {
-            var proizvod = _context.Proizvods.FirstOrDefault(p => p.ProizvodId == id);
-
-            if(proizvod == null)
-            {
-                return RedirectToAction("List");
-            }
-
-            return View(proizvod);
-        }
-
-        public IActionResult GetAllProducts()
-        {
+        public IActionResult GetAllProducts() {
             return View("IndexProduct", _context.Proizvods.ToList<Proizvod>());
         }
 
-        public IActionResult ViewTest()
-        {
+        public IActionResult ViewTest() {
             return View(_context.Proizvods.ToList<Proizvod>());
         }
 
-        public IActionResult List()
-        {
+        public IActionResult List() {
             return View(_context.Proizvods.ToList<Proizvod>());
         }
 
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        public IActionResult Delete(int id)
-        {
-            var proizvod = _context.Proizvods.FirstOrDefault<Proizvod>(p => p.ProizvodId == id);
-
-            if(proizvod == null)
-            {
-                return RedirectToAction("List");
-            }
-
-            return View(proizvod);
-        }
 
         [HttpPost]
-        public IActionResult Create(Proizvod model)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Proizvods.Add(model);
-                _context.SaveChanges();
-            }
+        public IActionResult Filter(string order, string name) {
+            System.Diagnostics.Debug.WriteLine("Order: " + order + " | Name: " + name);
 
-            return RedirectToAction("List");
-        }
-
-        [HttpPost]
-        public IActionResult Delete(Proizvod model)
-        {
-            _context.Proizvods.Remove(model);
-            _context.SaveChanges();
-
-            return RedirectToAction("List");
-        }
-
-        [HttpPost]
-        public IActionResult Filter(string order, string name)
-        {
-            System.Diagnostics.Debug.WriteLine("Order: " + order + " | Name: "+ name);
-
-            if (order.Equals("descending"))
-            {
+            if (order.Equals("descending")) {
                 var proizvodi = from p in _context.Proizvods
                                 where String.IsNullOrEmpty(name) ? p.Naziv.Contains(String.Empty) : p.Naziv.Contains(name)
                                 orderby p.Cena descending
                                 select p;
 
                 return View("IndexProduct", proizvodi);
-            }
-            else
-            {
+            } else {
                 var proizvodi = from p in _context.Proizvods
                                 where String.IsNullOrEmpty(name) ? p.Naziv.Contains(String.Empty) : p.Naziv.Contains(name)
                                 orderby p.Cena ascending
@@ -109,39 +49,14 @@ namespace LegoProdavnica.Controllers
 
                 return View("IndexProduct", proizvodi);
             }
+
         }
 
-        [HttpPost]
-        public IActionResult Edit(Proizvod model)
-        {
-            if (model == null)
-            {
-                return View();
-            }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Proizvods.Update(model);
-                    _context.SaveChanges();
-                }
-                catch(Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine(ex.Message);
-                    return View(); //Ispisati da je doslo do greske
-                }
-            }
-
-            return RedirectToAction("List");
-        }
-
-        public IActionResult DetailedView(Proizvod item)
-        {
+        public IActionResult DetailedView(Proizvod item) {
             var recs = _context.Recenzijas.Where(r => r.ProizvodId == item.ProizvodId).ToList();
 
-            foreach (var r in recs)
-            {
+            foreach (var r in recs) {
                 r.Korisnik = _context.Profils.FirstOrDefault(p => p.ProfilId == r.KorisnikId);
             }
 
@@ -150,65 +65,73 @@ namespace LegoProdavnica.Controllers
             return View(item);
         }
 
-        public IActionResult buyCart()
-        {
+        public IActionResult buyCart(Profil user) {
             List<Proizvod> items = new List<Proizvod>();
             string? itemsCookie = "";
             Request.Cookies.TryGetValue("items", out itemsCookie);
 
-            if (itemsCookie != null)
-            {
+            if (itemsCookie != null) {
                 items = JsonConvert.DeserializeObject<List<Proizvod>>(itemsCookie);
             }
 
-            if (items.Count > 0)
-            {
+            System.Diagnostics.Debug.WriteLine(items.Count);
+
+            if (items.Count > 0) {
                 Racun racun = new Racun();
                 decimal? ukupnaCena = 0;
                 List<RacunProizvod> rps = new List<RacunProizvod>();
 
-                foreach (var i in items)
-                {
-                    System.Diagnostics.Debug.WriteLine(i);
+                foreach (var i in items) {
                     ukupnaCena += i.Cena;
                 }
 
                 racun.UkupnaCena = ukupnaCena;
                 racun.DatumIzdavanja = DateTime.Now;
+                racun.KorisnikId = user.ProfilId;
 
-                // TODO: Dodati IdKorisnika ovde
-
-                try
-                {
+                try {
                     _context.Racuns.Add(racun);
                     _context.SaveChanges();
 
-                    
-                }
-                catch (Exception ex)
-                {
+                    foreach (var i in items) {
+                        var rp = new RacunProizvod();
+                        rp.DatumDodavanja = DateTime.Now;
+                        rp.RacunId = racun.RacunId;
+                        rp.ProizvodId = i.ProizvodId;
+                        rp.Proizvod = _context.Proizvods.FirstOrDefault(p => p.ProizvodId == i.ProizvodId);
+                        rps.Add(rp);
+
+                        _context.RacunProizvods.Add(rp);
+                        _context.SaveChanges();
+                    }
+
+                    racun.RacunProizvods = rps;
+                } catch (Exception ex) {
                     System.Diagnostics.Debug.WriteLine("Greska kod slanja poruke");
 
                     System.Diagnostics.Debug.WriteLine(ex.Message);
                 }
 
-                try
-                {
+                try {
                     System.Diagnostics.Debug.WriteLine("Slanje poruke");
 
-                    var message = new Message("akitasevski112@gmail.com", "Test buy email", "Ovo je poruka");
+                    var message = new Message(user.Email, "Lego prodavnica - Racun - " + DateTime.Now, "");
+
+                    foreach (var p in rps) {
+                        message.Body += "Naziv: " + p.Proizvod.Naziv + " - Cena: " + p.Proizvod.Cena + "\n";
+                    }
+
+                    message.Body += "Ukupna vrednost je: " + racun.UkupnaCena + " RSD";
 
                     _emailSender.SendEmail(message);
-                }catch(Exception ex)
-                {
+                } catch (Exception ex) {
                     System.Diagnostics.Debug.WriteLine("Greska kod slanja poruke");
                     System.Diagnostics.Debug.WriteLine(ex.Message);
 
                 }
 
 
-                foreach (var i in items)
-                {
+                foreach (var i in items) {
                     RacunProizvod rp = new RacunProizvod();
                     rp.RacunId = racun.RacunId;
                     rp.ProizvodId = i.ProizvodId;
@@ -218,17 +141,13 @@ namespace LegoProdavnica.Controllers
                 }
 
 
-                try
-                {
-                    foreach (var item in rps)
-                    {
+                try {
+                    foreach (var item in rps) {
                         _context.RacunProizvods.Add(item);
                     }
 
                     _context.SaveChanges();
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     System.Diagnostics.Debug.WriteLine(ex.Message);
                 }
             }
@@ -238,14 +157,12 @@ namespace LegoProdavnica.Controllers
             return View("IndexProduct", _context.Proizvods.ToList<Proizvod>());
         }
 
-        public IActionResult addToCart(Proizvod item)
-        {
+        public IActionResult addToCart(Proizvod item) {
             List<Proizvod> items = new List<Proizvod>();
             string? itemsCookie = "";
             Request.Cookies.TryGetValue("items", out itemsCookie);
 
-            if (itemsCookie != null)
-            {
+            if (itemsCookie != null) {
                 items = JsonConvert.DeserializeObject<List<Proizvod>>(itemsCookie);
             }
 
@@ -268,7 +185,7 @@ namespace LegoProdavnica.Controllers
             try {
                 _context.Recenzijas.Add(rec);
                 _context.SaveChanges();
-            }catch(Exception ex) {
+            } catch (Exception ex) {
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
 
@@ -284,12 +201,10 @@ namespace LegoProdavnica.Controllers
             n.DatumKreacije = DateTime.Now;
             n.DatumDostave = DateTime.Now.AddDays(5);
 
-            System.Diagnostics.Debug.WriteLine(n.Adresa + " " + n.KorisnikId + " " + n.KorisnikId + " " + n.ProizvodId);
-
             try {
                 _context.Narudzbinas.Add(n);
                 _context.SaveChanges();
-            }catch(Exception ex) {
+            } catch (Exception ex) {
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
 
@@ -307,7 +222,7 @@ namespace LegoProdavnica.Controllers
             try {
                 _context.Rezervacijas.Add(r);
                 _context.SaveChanges();
-            }catch(Exception ex) {
+            } catch (Exception ex) {
                 System.Diagnostics.Debug.WriteLine(ex.ToString());
             }
 

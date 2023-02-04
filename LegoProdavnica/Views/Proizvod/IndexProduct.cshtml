@@ -1,4 +1,5 @@
-﻿@model IEnumerable<LegoProdavnica.Models.Proizvod>
+﻿@using Newtonsoft.Json;
+@model IEnumerable<LegoProdavnica.Models.Proizvod>
 
 @{
 	ViewData["Title"] = "IndexProduct";
@@ -138,15 +139,22 @@
 
 </style>
 
+@{
+	string userString = "";
+	bool result = Context.Request.Cookies.TryGetValue("token", out userString);
+	Profil user = new Profil();
+	user.UlogaId = -1;
+
+	if (result) {
+		user = JsonConvert.DeserializeObject<Profil>(userString);
+	}
+}
+
 	<div id="carouselExampleControls" class="carousel slide carousel-fade crsl" data-bs-ride="carousel">
 		<div class="carousel-inner">
 		<div class="carousel-item active">
 			<div class="containerV">
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-						Nam quis quam in augue ullamcorper ullamcorper nec quis erat. 
-						Nunc ultricies diam in purus egestas, sit amet 
-						placerat ligula sollicitudin.</p>
-						<a href="#" class="btn btn-dark">Learn more</a>
+
 			</div>     
 			<div>
 				<img class="overlay-image" src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"  alt="First slide">
@@ -154,9 +162,7 @@
 		</div>
 		<div class="carousel-item">
 			<div class="containerV">
-				<p>Sit amet 
-						placerat ligula sollicitudin.</p>
-						<a href="#" class="btn btn-outline-dark light-outline">Learn more</a>
+
 			</div>     
 			<div>
 			<img class="overlay-image" src="https://images.unsplash.com/photo-1560961911-293cfd783727?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80" alt="Second slide">
@@ -198,7 +204,7 @@
 	}
 
 
-<h3 class="display-5 mt-6">Recommended For You</h3>
+<h3 class="display-5 mt-6">Preporuceno za vas</h3>
 
 	<div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
 		@foreach (var item in Model) {
@@ -210,13 +216,15 @@
 				  <img src="@item.Slika" class="card-img-top" alt="@item.Naziv" />
 				</div>
 			  <div class="card-body">
-						@*Modalni prozori moraju da se promene nekako da bude posebno za svaki proizvod, ali to cemo da vidimo kako jos*@
 				<h5 class="card-title hover-underline-animation"><a data-bs-toggle="modal" data-bs-target="#@fName" class="stretched-link prTitle " style="position: relative;">@item.Naziv</a></h5>
 				<p class="card-text font-weight-bold">
-							@item.Cena RSD
+					@item.Cena RSD
 				</p>
-
-				<button type="button" class="btn btn-outline-primary cartBtn" onclick="location.href='@Url.Action("addToCart", "Proizvod", @item)'" >Dodaj u korpu</button>
+				@if(user.UlogaId == -1) {
+					<h5>Morate se ulogovati da bi dodali u korpu.</h5>
+				} else {
+					<button type="button" class="btn btn-outline-primary cartBtn" onclick="location.href='@Url.Action("addToCart", "Proizvod", @item)'" >Dodaj u korpu</button>
+				}
 			  </div>
 			</div>
 		  </div>
@@ -243,7 +251,11 @@
 									</div>
 									<div class="d-flex ml-10 mr-0 p-2">
 										<div class="p-2">
-											<button type="button" class="btn btn-outline-primary cartBtn" onclick="location.href='@Url.Action("addToCart", "Proizvod", @item)'" >Kupi</button>
+											@if (user.UlogaId == -1) {
+												<h5>Morate se ulogovati da bi dodali u korpu.</h5>
+											} else {
+												<button type="button" class="btn btn-outline-primary cartBtn" onclick="location.href='@Url.Action("addToCart", "Proizvod", @item)'" >Dodaj u korpu</button>
+											}
 										</div>
 										<div class="p-2">
 											<button type="button" class="btn btn-outline-primary cartBtn" onclick="location.href='@Url.Action("DetailedView", "Proizvod", @item)'" >Detaljno</button>

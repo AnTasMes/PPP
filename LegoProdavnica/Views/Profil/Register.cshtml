@@ -32,19 +32,19 @@
                   @*<input type="text" name="rgEmail" class="form-control" placeholder="example@example.com" />*@
               </div> 
               <div class="form-group">
-                  <label class="col-sm col-form-label" for="rgUsername">Username:</label>
+                  <label class="col-sm col-form-label" for="rgUsername">Korisnicko ime:</label>
                   @Html.TextBoxFor(p => p.KorisnickoIme, new {@class="form-control"})
 
                   @*<input type="text" name="rgUsername" class="form-control" placeholder="Unesite korisničko ime" />*@
               </div>         
               <div class="form-group">
-                  <label class="col-sm-2 col-form-label" for="oPwd">Password:</label>
+                  <label class="col-sm-2 col-form-label" for="oPwd">Sifra:</label>
                   @Html.PasswordFor(p => p.Sifra, new {@class="form-control", @id="oPwd"})
                   
                   @*<input type="password" name="rgPassword" class="form-control" placeholder="Unesite korisničku šifru" />*@
               </div>
               <div class="form-group">
-                  <label class="col-sm-2 col-form-label" for="confirm">Confirm Password:</label>
+                  <label class="col-sm-2 col-form-label" for="confirm">Ponovi sifru:</label>
                   <input type="password" name="confirm" id="confirm" class="form-control" placeholder="Ponovite sifru" />
               </div>
               <div class="mt-5 modal-footer d-flex justify-content-center">

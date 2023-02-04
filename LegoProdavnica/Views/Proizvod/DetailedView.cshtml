@@ -42,8 +42,10 @@
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-outline-primary cartBtn mt-2" onclick="location.href='@Url.Action("addToCart", "Proizvod", Model)'" >Dodaj u korpu</button>
-        @if (result) {
+        @if (user.UlogaId == -1) {
+            <h5>Morate se ulogovati da bi dodali u korpu.</h5>
+        } else {
+            <button type="button" class="btn btn-outline-primary cartBtn mt-2" onclick="location.href='@Url.Action("addToCart", "Proizvod", Model)'" >Dodaj u korpu</button>
             <button type="button" class="btn btn-outline-primary cartBtn mt-2" data-bs-toggle="modal" data-bs-target="#naruciModal">Naruci</button>
             <button type="button" class="btn btn-outline-primary cartBtn mt-2" data-bs-toggle="modal" data-bs-target="#rezervisiModal">Rezervisi</button>
         }

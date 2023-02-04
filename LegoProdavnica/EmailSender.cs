@@ -1,26 +1,21 @@
-﻿using MimeKit;
-using MailKit.Net.Smtp;
+﻿using MailKit.Net.Smtp;
+using MimeKit;
 
-namespace LegoProdavnica
-{
-    public class EmailSender : IEmailSender
-    {
+namespace LegoProdavnica {
+    public class EmailSender : IEmailSender {
         private readonly EmailConfiguration _configuration;
 
-        public EmailSender(EmailConfiguration configuration)
-        {
+        public EmailSender(EmailConfiguration configuration) {
             this._configuration = configuration;
         }
 
-        public void SendEmail(Message message)
-        {
+        public void SendEmail(Message message) {
             var emailMessage = CreateEmailMessage(message);
 
             Send(emailMessage);
         }
 
-        public MimeMessage CreateEmailMessage(Message message)
-        {
+        public MimeMessage CreateEmailMessage(Message message) {
             System.Diagnostics.Debug.WriteLine("CreateEmailMessage....");
             System.Diagnostics.Debug.WriteLine(message.ToString());
 
@@ -44,12 +39,9 @@ namespace LegoProdavnica
             return emailMessage;
         }
 
-        private void Send(MimeMessage mailMessage)
-        {
-            using (var client = new SmtpClient())
-            {
-                try
-                {
+        private void Send(MimeMessage mailMessage) {
+            using (var client = new SmtpClient()) {
+                try {
                     System.Diagnostics.Debug.WriteLine("Send....");
 
                     client.Connect(_configuration.SmtpServer, _configuration.Port, true);
@@ -58,16 +50,12 @@ namespace LegoProdavnica
                     client.Send(mailMessage);
 
                     System.Diagnostics.Debug.WriteLine("Send Done!");
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     //log an error message or throw an exception or both.
                     System.Diagnostics.Debug.WriteLine("Doslo je do greske");
                     System.Diagnostics.Debug.WriteLine(ex.Message);
                     throw;
-                }
-                finally
-                {
+                } finally {
                     client.Disconnect(true);
                     client.Dispose();
                 }

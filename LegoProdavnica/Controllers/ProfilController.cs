@@ -12,7 +12,7 @@ namespace LegoProdavnica.Controllers {
         }
 
         public ActionResult Login() {
-			return View();
+            return View();
         }
 
         // GET: UserController
@@ -50,7 +50,7 @@ namespace LegoProdavnica.Controllers {
                     try {
                         _context.Profils.Update(p);
                         _context.SaveChanges();
-                    }catch(Exception ex) {
+                    } catch (Exception ex) {
                         System.Diagnostics.Debug.WriteLine(ex.Message);
                     }
                 }
@@ -118,17 +118,19 @@ namespace LegoProdavnica.Controllers {
             if (ModelState.IsValid) {
                 try {
                     if (_context.Profils.Any(p => p.KorisnickoIme.Equals(model.KorisnickoIme) && p.Sifra.Equals(p.Sifra))) {
-						var opt = new CookieOptions();
-						opt.Expires = DateTime.UtcNow.AddHours(1);
-
-                        model.Uloga = _context.Ulogas.FirstOrDefault(u => u.UlogaId == model.UlogaId);
+                        var opt = new CookieOptions();
+                        opt.Expires = DateTime.UtcNow.AddHours(1);
 
                         Profil korisnik = _context.Profils.FirstOrDefault(p => p.KorisnickoIme == model.KorisnickoIme);
 
-						string serialized = JsonConvert.SerializeObject(korisnik);
-						Response.Cookies.Append("token", serialized, opt);
+                        korisnik.Uloga = _context.Ulogas.FirstOrDefault(u => u.UlogaId == korisnik.UlogaId);
 
-						System.Diagnostics.Debug.WriteLine("Logged in");
+                        string serialized = JsonConvert.SerializeObject(korisnik, new JsonSerializerSettings {
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                        });
+                        Response.Cookies.Append("token", serialized, opt);
+
+                        System.Diagnostics.Debug.WriteLine("Logged in");
                         return RedirectToAction("Index");
                     }
                 } catch (Exception ex) {
